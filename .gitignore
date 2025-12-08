@@ -1,0 +1,9 @@
+# Node.js (Backend)
+Backend/node_modules/
+Backend/.env
+Backend/package-lock.json
+
+# React (Frontend)
+Frontend/node_modules/
+Frontend/.env
+Frontend/package-lock.json

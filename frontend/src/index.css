@@ -1,0 +1,352 @@
+/* Base styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Import Poppins font to match Laravel Stisla */
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
+
+/* Fixed footer at bottom - Main content scrolls, footer stays fixed */
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding-bottom: 70px;
+    /* Space for fixed footer */
+    overflow-y: auto;
+}
+
+.main-footer {
+    position: fixed;
+    bottom: 0;
+    left: 250px;
+    /* Same as sidebar width */
+    right: 0;
+    z-index: 1000;
+    background: #fff;
+    border-top: 1px solid #e3eaef;
+    padding: 10px 15px;
+}
+
+/* When sidebar is collapsed */
+.sidebar-mini .main-footer {
+    left: 70px;
+}
+
+/* Sidebar dropdown functionality */
+.sidebar-menu li.nav-item.dropdown .dropdown-menu {
+    display: none;
+    padding-left: 0;
+    list-style: none;
+}
+
+.sidebar-menu li.nav-item.dropdown.active>.dropdown-menu {
+    display: block;
+}
+
+.sidebar-menu li.nav-item.dropdown>a::after {
+    content: '\f107';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    transition: transform 0.3s;
+}
+
+.sidebar-menu li.nav-item.dropdown.active>a::after {
+    transform: rotate(180deg);
+}
+
+/* Sidebar scroll */
+#sidebar-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 60px);
+}
+
+/* Active menu item styling */
+.sidebar-menu li.active>a {
+    background-color: #6777ef;
+    color: #fff !important;
+}
+
+.sidebar-menu li.active>a i {
+    color: #fff !important;
+}
+
+/* Sidebar search box styling */
+.sidebar-search-box {
+    padding: 10px;
+}
+
+.sidebar-search-box .form-control {
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.sidebar-search-box .no-results {
+    display: none;
+    color: #999;
+    font-size: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .main-footer {
+        left: 0;
+    }
+}
+
+/* ========================================= */
+/* Member Card Styles - Matches Laravel UI  */
+/* ========================================= */
+
+/* Fix shaking - stable card with no transform on hover */
+.livewire-card {
+    transition: box-shadow 0.3s ease;
+    height: auto;
+    min-height: 170px;
+}
+
+.livewire-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.user-card-view {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.user-card-view .card-header {
+    background: transparent;
+    border-bottom: none;
+    padding: 15px;
+}
+
+.user-card-view .card-body {
+    padding-top: 0;
+}
+
+/* User avatar - Fixed dimensions to prevent layout shift */
+.user-avatar-image {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    background-color: #e4e6fc;
+    display: block;
+}
+
+.author-box-left {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    flex-shrink: 0;
+}
+
+/* Card member role badge */
+.card-member-role {
+    font-size: 12px;
+    color: #98a6ad;
+    font-weight: 500;
+}
+
+/* Card user email */
+.card-user-email {
+    font-size: 12px;
+    color: #6c757d;
+    word-break: break-all;
+}
+
+/* Email verification icons */
+.email-verified {
+    color: #47c363 !important;
+}
+
+.email-not-verified {
+    color: #fc544b !important;
+}
+
+/* User card name */
+.user-card-name h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: #34395e;
+}
+
+.user-card-name h4:hover {
+    color: #6777ef;
+}
+
+/* Action dropdown */
+.action-dropdown {
+    color: #6c757d;
+    padding: 5px;
+}
+
+.action-dropdown:hover {
+    color: #6777ef;
+}
+
+.action-toggle-mr {
+    font-size: 14px;
+}
+
+/* Status toggle switch */
+.member-card-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.card-toggle-mr {
+    margin-right: 10px;
+}
+
+/* Email verify buttons */
+.email-verify-btn,
+.email-btn,
+.email-verified-btn {
+    border-radius: 3px;
+}
+
+.font-size-12px {
+    font-size: 12px;
+}
+
+/* Card edit/delete icons */
+.card-edit-icon {
+    color: #6777ef;
+}
+
+.card-delete-icon {
+    color: #fc544b;
+}
+
+/* Anchor underline on hover */
+.anchor-underline:hover {
+    text-decoration: underline;
+}
+
+/* Extra large screens */
+.extra-large {
+    padding: 0 10px;
+}
+
+/* Permission section styles */
+.permission-text {
+    font-size: 13px;
+}
+
+.permission-text .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #34395e;
+    margin-bottom: 10px;
+}
+
+/* Paginator styles */
+.paginatorRow {
+    padding: 10px;
+}
+
+/* Custom switch styling to match Stisla */
+.custom-switch .custom-switch-indicator {
+    width: 36px;
+    height: 20px;
+    border-radius: 20px;
+    background: #e4e6fc;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.custom-switch .custom-switch-indicator::before {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    top: 3px;
+    left: 3px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-switch .custom-switch-input:checked+.custom-switch-indicator {
+    background: #6777ef;
+}
+
+.custom-switch .custom-switch-input:checked+.custom-switch-indicator::before {
+    left: 19px;
+}
+
+.custom-switch-input {
+    display: none;
+}
+
+/* Required field asterisk */
+.required {
+    color: #fc544b;
+    margin-left: 2px;
+}
+
+/* Profile image upload label styling */
+.image__file-upload {
+    background-color: #6777ef;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.image__file-upload:hover {
+    background-color: #394eea;
+    text-decoration: none;
+    color: #fff;
+}
+
+.profile-label-color {
+    color: #34395e;
+    font-weight: 600;
+    display: block;
+    font-size: 12px;
+    letter-spacing: .5px;
+}
+
+.thumbnail-preview {
+    width: 65px;
+    height: auto;
+    object-fit: cover;
+}
+
+#valid-msg {
+    color: #00c900;
+}
+
+#error-msg {
+    color: red;
+}
+
+.hide {
+    display: none;
+}
