@@ -36,7 +36,8 @@ const MemberCreate = () => {
             // Assuming there's an endpoint for this or we just fetch permissions
             const permResponse = await api.get('/permissions');
             if (permResponse.data.success) {
-                setPermissions(permResponse.data.data);
+                // Use permissions object, not the entire data object
+                setPermissions(permResponse.data.data.permissions || {});
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -116,9 +117,9 @@ const MemberCreate = () => {
     return (
         <section className="section">
             <div className="section-header">
-                <h1>Create Member</h1>
+                <h1>New Member</h1>
                 <div className="section-header-breadcrumb">
-                    <Link to="/members" className="btn btn-primary form-btn float-right">Back</Link>
+                    <Link to="/members" className="btn btn-primary form-btn float-right-mobile">Back</Link>
                 </div>
             </div>
             <div className="section-body">

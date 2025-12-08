@@ -36,7 +36,7 @@ const MemberEdit = () => {
 
                 // Fetch Permissions
                 const permResponse = await api.get('/permissions');
-                setPermissions(permResponse.data.data);
+                setPermissions(permResponse.data.data.permissions || {});
 
                 // Set Form Data
                 setFormData({

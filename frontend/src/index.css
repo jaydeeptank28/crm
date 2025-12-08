@@ -350,3 +350,274 @@ body {
 .hide {
     display: none;
 }
+
+/* ========================================= */
+/* Sidebar Styles - Exact Match to PHP      */
+/* ========================================= */
+
+/* Sidebar base styling */
+.main-sidebar {
+    background-color: #fff !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+}
+
+.main-sidebar .sidebar-menu li.menu-header,
+.main-sidebar .sidebar-menu li a {
+    color: #78828a;
+}
+
+/* Sidebar sticky brand */
+.sidebar-sticky {
+    background: #fff !important;
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 999 !important;
+}
+
+.sidebar-bottom-padding {
+    padding-bottom: 115px !important;
+}
+
+.line-height-0 {
+    line-height: unset !important;
+}
+
+.padding-bottom-zero {
+    padding-bottom: 0 !important;
+}
+
+/* Sidebar menu icon colors - EXACT MATCH FROM PHP */
+.sidebar-menu .fa-ticket-alt { color: #e6b86e; }
+.sidebar-menu .fa-erlang { color: #37cfe7; }
+.sidebar-menu .fa-tty { color: #3498db; }
+.sidebar-menu .fa-tasks { color: red; }
+.sidebar-menu .fa-tags { color: #f804c7; }
+.sidebar-menu .fa-user-friends { color: #37e339; }
+.sidebar-menu .fa-street-view { color: maroon; }
+.sidebar-menu .fa-object-group { color: #5cfa0d; }
+.sidebar-menu .fa-file-signature { color: #74872c; }
+.sidebar-menu .fa-file-contract { color: #eb2f35; }
+.sidebar-menu .fa-stripe-s { color: #f1db12; }
+.sidebar-menu .fa-cogs { color: #ff1493; }
+.sidebar-menu .fa-sticky-note { color: #06efef; }
+.sidebar-menu .fa-reply { color: #d2691e; }
+.sidebar-menu .fa-info-circle { color: #b5b509; }
+.sidebar-menu .fa-layer-group { color: navy; }
+.sidebar-menu .fa-tachometer-alt { color: blue; }
+.sidebar-menu .fa-speakap { color: #4b064e; }
+.sidebar-menu .fa-columns { color: #09ef21; }
+.sidebar-menu .fa-product-hunt { color: #6a2ff6; }
+.sidebar-menu .fa-bullhorn { color: #f99f0b; }
+.sidebar-menu .fa-sitemap { color: #573a0b; }
+.sidebar-menu .fa-percent { color: #000; }
+.sidebar-menu .fa-bullseye { color: #6ee6da; }
+.sidebar-menu .fa-people-arrows { color: #006400; }
+.sidebar-menu .fa-edit { color: #e6b86e; }
+.sidebar-menu .fa-autoprefixer { color: teal; }
+.sidebar-menu .fa-blender-phone { color: #7d3c98; }
+.sidebar-menu .fa-globe { color: #34495e; }
+.sidebar-menu .fa-clipboard { color: salmon; }
+.sidebar-menu .fa-calculator { color: #2e8b57; }
+.sidebar-menu .fa-file-invoice { color: blue; }
+.sidebar-menu .fa-scroll { color: #ff1493; }
+.sidebar-menu .fa-money-check-alt { color: #9acd32; }
+.sidebar-menu .fa-list-ol { color: #260bef; }
+.sidebar-menu .fa-clipboard-check { color: #db8803; }
+.sidebar-menu .fa-language { color: brown; }
+.sidebar-menu .fa-globe-asia { color: coral; }
+
+/* Font Awesome lg class */
+.fa-lg {
+    font-size: 1.33333em !important;
+}
+
+/* Menu text wrap */
+.menu-text-wrap {
+    width: 206px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* Main footer from PHP */
+.main-footer {
+    background-color: #f4f6f9 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    z-index: 1 !important;
+}
+
+/* Navbar styling */
+.navbar .nav-link {
+    color: #f2f2f2;
+    height: 100%;
+    padding: 0 15px !important;
+}
+
+.navbar .nav-link:hover {
+    color: #fff;
+}
+
+.navbar .nav-link.nav-link-lg i {
+    font-size: 18px;
+    line-height: 32px;
+    margin-left: 0 !important;
+}
+
+/* Search input */
+.search-input-css {
+    letter-spacing: 1px;
+    padding: 5px;
+    width: 230px !important;
+}
+
+/* User avatar image */
+.user-avatar-image {
+    height: 50px;
+    width: 50px;
+    object-fit: cover !important;
+}
+
+/* Profile styling */
+.profile {
+    background-color: #e0e1e9 !important;
+    border: 1px solid #d2d6de !important;
+    border-radius: 50% !important;
+    margin-top: -5px !important;
+    object-fit: cover !important;
+    padding: 2px !important;
+    width: inherit !important;
+}
+
+/* Navbar brand full name */
+.navbar-brand-full-name {
+    color: #000;
+    font-weight: 600;
+}
+
+/* Section header and breadcrumb */
+.section .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.section .section-header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #34395e;
+}
+
+.section .section-header-breadcrumb {
+    display: flex;
+    align-items: center;
+}
+
+/* Float right on desktop */
+.float-right-mobile {
+    float: right !important;
+}
+
+/* Loader styles */
+.infy-loader {
+    display: none;
+}
+
+.infy-loader.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+}
+
+/* Custom button styling */
+.btn-primary {
+    background-color: #6777ef;
+    border-color: #6777ef;
+}
+
+.btn-primary:hover {
+    background-color: #394eea;
+    border-color: #394eea;
+}
+
+/* Add button styling */
+.add-button {
+    border-radius: .25rem !important;
+    padding: 6px 13px 7px 15px !important;
+}
+
+/* Active menu styling */
+.sidebar-menu li.active > a {
+    background-color: #6777ef !important;
+    color: #fff !important;
+}
+
+.sidebar-menu li.active > a i {
+    color: #fff !important;
+}
+
+/* Dropdown menu links active styling */
+body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li.active > a,
+body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li > a:focus {
+    background-color: #fff !important;
+    color: #6777ef;
+}
+
+/* Bootstrap datetimepicker active styling */
+.bootstrap-datetimepicker-widget table td.active {
+    background-color: #6777ef !important;
+    border-radius: 5px !important;
+    color: #fff !important;
+}
+
+/* DateRangePicker active range */
+.daterangepicker .ranges li.active {
+    background-color: #6777ef !important;
+}
+
+/* Dashboard Cards Gradients */
+.d-total-one-border { border-top: 2px solid #0093e9; }
+.d-total-one-bg { 
+    background-color: #0093e9;
+    background-image: linear-gradient(135deg, #0093e9 0%, #80d0c7 100%);
+}
+
+.d-total-two-border { border-top: 2px solid #f6d365; }
+.d-total-two-bg {
+    background-color: #f6d365;
+    background-image: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+.d-total-three-border { border-top: 2px solid #667eea; }
+.d-total-three-bg {
+    background-color: #667eea;
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.d-total-four-border { border-top: 2px solid #6a11cb; }
+.d-total-four-bg {
+    background-color: #6a11cb;
+    background-image: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+
+.d-total-five-border { border-top: 2px solid #4481eb; }
+.d-total-five-bg {
+    background-color: #4481eb;
+    background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);
+}
+
+.d-total-six-border { border-top: 2px solid #fc6076; }
+.d-total-six-bg {
+    background-color: #fc6076;
+    background-image: linear-gradient(135deg, #fc6076 0%, #ff9a44 100%);
+}
