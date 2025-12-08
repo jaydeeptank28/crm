@@ -6,6 +6,12 @@ import Swal from 'sweetalert2';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+// Helper function to match Laravel's Str::limit
+const strLimit = (str, limit = 12, end = '...') => {
+    if (!str) return '';
+    return str.length > limit ? str.substring(0, limit) + end : str;
+};
+
 const Members = () => {
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,6 +20,20 @@ const Members = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [pagination, setPagination] = useState({ from: 0, to: 0, total: 0 });
+    const [loggedInUserId, setLoggedInUserId] = useState(null);
+
+    useEffect(() => {
+        // Get logged in user ID from localStorage
+        const user = localStorage.getItem('user');
+        if (user) {
+            try {
+                const parsed = JSON.parse(user);
+                setLoggedInUserId(parsed.id);
+            } catch (e) {
+                console.error('Error parsing user:', e);
+            }
+        }
+    }, []);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -52,7 +72,7 @@ const Members = () => {
 
     const handleStatusToggle = async (id, currentStatus) => {
         try {
-            await api.put(`/members/${id}/status`, { is_enable: !currentStatus });
+            await api.patch(`/members/${id}/toggle-status`, { is_enable: !currentStatus });
             fetchMembers(); // Refresh list
             const Toast = Swal.mixin({
                 toast: true,
@@ -178,11 +198,13 @@ const Members = () => {
                                                     <div className="justify-content-between d-flex">
                                                         <div className="user-card-name pb-1">
                                                             <Link to={`/members/${member.id}`} className="anchor-underline">
-                                                                <h4>{member.first_name} {member.last_name}</h4>
+                                                                <h4>{strLimit(member.first_name, 12, '...')}</h4>
                                                             </Link>
                                                         </div>
-                                                        <div className="dropdown dropdown-list-toggle">
-                                                            <a href="#" data-toggle="dropdown" className="notification-toggle action-dropdown position-xs-bottom">
+                                                        <a className="dropdown dropdown-list-toggle">
+                                                            <a href="#" data-toggle="dropdown"
+                                                                className="notification-toggle action-dropdown d-none position-xs-bottom"
+                                                                onClick={(e) => e.preventDefault()}>
                                                                 <i className="fas fa-ellipsis-v action-toggle-mr"></i>
                                                             </a>
                                                             <div className="dropdown-menu dropdown-menu-right">
@@ -190,22 +212,26 @@ const Members = () => {
                                                                     <Link to={`/members/${member.id}/edit`} className="dropdown-item dropdown-item-desc edit-btn">
                                                                         <i className="fas fa-edit mr-2 card-edit-icon"></i> Edit
                                                                     </Link>
-                                                                    <a href="#" className="dropdown-item dropdown-item-desc delete-btn" onClick={(e) => { e.preventDefault(); handleDelete(member.id); }}>
-                                                                        <i className="fas fa-trash mr-2 card-delete-icon"></i> Delete
-                                                                    </a>
+                                                                    {loggedInUserId !== member.id && (
+                                                                        <a href="#" className="dropdown-item dropdown-item-desc delete-btn" onClick={(e) => { e.preventDefault(); handleDelete(member.id); }}>
+                                                                            <i className="fas fa-trash mr-2 card-delete-icon"></i> Delete
+                                                                        </a>
+                                                                    )}
                                                                 </div>
                                                             </div>
+                                                        </a>
+                                                    </div>
+                                                    {member.role_names && (
+                                                        <div className="card-member-role">
+                                                            {member.role_names}
                                                         </div>
-                                                    </div>
-                                                    <div className="card-member-role">
-                                                        {member.role_names}
-                                                    </div>
+                                                    )}
                                                     <div className="card-user-email pt-1 mb-1">
                                                         {member.email}
                                                         {member.email_verified_at ? (
-                                                            <span title="Email is verified"><i className="fas fa-check-circle email-verified ml-1"></i></span>
+                                                            <span data-toggle="tooltip" title="Email is verified"><i className="fas fa-check-circle email-verified"></i></span>
                                                         ) : (
-                                                            <span title="Email is not verified"><i className="fas fa-times-circle email-not-verified ml-1"></i></span>
+                                                            <span data-toggle="tooltip" title="Email is not verified"><i className="fas fa-times-circle email-not-verified"></i></span>
                                                         )}
                                                     </div>
                                                     <div className="mr-3 mt-2">
@@ -214,17 +240,24 @@ const Members = () => {
                                                 </div>
                                             </div>
                                             <div className="card-body d-flex align-items-center pt-0 pl-3 ml-2">
-                                                <div className="mt-2 member-card-toggle card-toggle-mr">
-                                                    <label className="custom-switch pl-0" title="Status">
-                                                        <input
-                                                            type="checkbox"
-                                                            className="custom-switch-input"
-                                                            checked={member.is_enable}
-                                                            onChange={() => handleStatusToggle(member.id, member.is_enable)}
-                                                        />
-                                                        <span className="custom-switch-indicator"></span>
-                                                    </label>
-                                                </div>
+                                                {member.id !== loggedInUserId && (
+                                                    <div className="mt-2 member-card-toggle card-toggle-mr">
+                                                        <label className="custom-switch pl-0" data-placement="bottom"
+                                                            data-toggle="tooltip" title="Status">
+                                                            <input
+                                                                type="checkbox"
+                                                                name="is_enable"
+                                                                className="custom-switch-input is-administrator"
+                                                                data-id={member.id}
+                                                                value="1"
+                                                                data-class="is_enable"
+                                                                checked={member.is_enable}
+                                                                onChange={() => handleStatusToggle(member.id, member.is_enable)}
+                                                            />
+                                                            <span className="custom-switch-indicator"></span>
+                                                        </label>
+                                                    </div>
+                                                )}
 
                                                 {!member.email_verified_at ? (
                                                     <div className="ml-auto mt-1 member-card-toggle">
@@ -244,17 +277,20 @@ const Members = () => {
                                                     </div>
                                                 ) : (
                                                     <div className="ml-auto mt-1 member-card-toggle">
-                                                        {member.is_enable && (
-                                                            <button
-                                                                className="btn btn-primary btn-sm p-0 pl-1 pr-1 email-verified-btn mr-1"
-                                                                title="Impersonate"
-                                                                onClick={() => handleImpersonate(member.id)}
-                                                            >
-                                                                <i className="fas fa-user font-size-12px"></i>
-                                                            </button>
+                                                        {!member.is_admin && member.is_enable && (
+                                                            <a href="#" onClick={(e) => { e.preventDefault(); handleImpersonate(member.id); }}>
+                                                                <button
+                                                                    className="btn btn-primary btn-sm p-0 pl-1 pr-1 email-verified-btn"
+                                                                    data-toggle="tooltip"
+                                                                    title="Impersonate"
+                                                                >
+                                                                    <i className="fas fa-user font-size-12px"></i>
+                                                                </button>
+                                                            </a>
                                                         )}
                                                         <button
                                                             className="btn btn-success btn-sm p-0 pl-1 pr-1 email-verified-btn"
+                                                            data-toggle="tooltip"
                                                             title="Email Verified"
                                                         >
                                                             <i className="fas fa-envelope font-size-12px"></i>

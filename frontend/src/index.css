@@ -388,44 +388,157 @@ body {
 }
 
 /* Sidebar menu icon colors - EXACT MATCH FROM PHP */
-.sidebar-menu .fa-ticket-alt { color: #e6b86e; }
-.sidebar-menu .fa-erlang { color: #37cfe7; }
-.sidebar-menu .fa-tty { color: #3498db; }
-.sidebar-menu .fa-tasks { color: red; }
-.sidebar-menu .fa-tags { color: #f804c7; }
-.sidebar-menu .fa-user-friends { color: #37e339; }
-.sidebar-menu .fa-street-view { color: maroon; }
-.sidebar-menu .fa-object-group { color: #5cfa0d; }
-.sidebar-menu .fa-file-signature { color: #74872c; }
-.sidebar-menu .fa-file-contract { color: #eb2f35; }
-.sidebar-menu .fa-stripe-s { color: #f1db12; }
-.sidebar-menu .fa-cogs { color: #ff1493; }
-.sidebar-menu .fa-sticky-note { color: #06efef; }
-.sidebar-menu .fa-reply { color: #d2691e; }
-.sidebar-menu .fa-info-circle { color: #b5b509; }
-.sidebar-menu .fa-layer-group { color: navy; }
-.sidebar-menu .fa-tachometer-alt { color: blue; }
-.sidebar-menu .fa-speakap { color: #4b064e; }
-.sidebar-menu .fa-columns { color: #09ef21; }
-.sidebar-menu .fa-product-hunt { color: #6a2ff6; }
-.sidebar-menu .fa-bullhorn { color: #f99f0b; }
-.sidebar-menu .fa-sitemap { color: #573a0b; }
-.sidebar-menu .fa-percent { color: #000; }
-.sidebar-menu .fa-bullseye { color: #6ee6da; }
-.sidebar-menu .fa-people-arrows { color: #006400; }
-.sidebar-menu .fa-edit { color: #e6b86e; }
-.sidebar-menu .fa-autoprefixer { color: teal; }
-.sidebar-menu .fa-blender-phone { color: #7d3c98; }
-.sidebar-menu .fa-globe { color: #34495e; }
-.sidebar-menu .fa-clipboard { color: salmon; }
-.sidebar-menu .fa-calculator { color: #2e8b57; }
-.sidebar-menu .fa-file-invoice { color: blue; }
-.sidebar-menu .fa-scroll { color: #ff1493; }
-.sidebar-menu .fa-money-check-alt { color: #9acd32; }
-.sidebar-menu .fa-list-ol { color: #260bef; }
-.sidebar-menu .fa-clipboard-check { color: #db8803; }
-.sidebar-menu .fa-language { color: brown; }
-.sidebar-menu .fa-globe-asia { color: coral; }
+.sidebar-menu .fa-ticket-alt {
+    color: #e6b86e;
+}
+
+.sidebar-menu .fa-erlang {
+    color: #37cfe7;
+}
+
+.sidebar-menu .fa-tty {
+    color: #3498db;
+}
+
+.sidebar-menu .fa-tasks {
+    color: red;
+}
+
+.sidebar-menu .fa-tags {
+    color: #f804c7;
+}
+
+.sidebar-menu .fa-user-friends {
+    color: #37e339;
+}
+
+.sidebar-menu .fa-street-view {
+    color: maroon;
+}
+
+.sidebar-menu .fa-object-group {
+    color: #5cfa0d;
+}
+
+.sidebar-menu .fa-file-signature {
+    color: #74872c;
+}
+
+.sidebar-menu .fa-file-contract {
+    color: #eb2f35;
+}
+
+.sidebar-menu .fa-stripe-s {
+    color: #f1db12;
+}
+
+.sidebar-menu .fa-cogs {
+    color: #ff1493;
+}
+
+.sidebar-menu .fa-sticky-note {
+    color: #06efef;
+}
+
+.sidebar-menu .fa-reply {
+    color: #d2691e;
+}
+
+.sidebar-menu .fa-info-circle {
+    color: #b5b509;
+}
+
+.sidebar-menu .fa-layer-group {
+    color: navy;
+}
+
+.sidebar-menu .fa-tachometer-alt {
+    color: blue;
+}
+
+.sidebar-menu .fa-speakap {
+    color: #4b064e;
+}
+
+.sidebar-menu .fa-columns {
+    color: #09ef21;
+}
+
+.sidebar-menu .fa-product-hunt {
+    color: #6a2ff6;
+}
+
+.sidebar-menu .fa-bullhorn {
+    color: #f99f0b;
+}
+
+.sidebar-menu .fa-sitemap {
+    color: #573a0b;
+}
+
+.sidebar-menu .fa-percent {
+    color: #000;
+}
+
+.sidebar-menu .fa-bullseye {
+    color: #6ee6da;
+}
+
+.sidebar-menu .fa-people-arrows {
+    color: #006400;
+}
+
+.sidebar-menu .fa-edit {
+    color: #e6b86e;
+}
+
+.sidebar-menu .fa-autoprefixer {
+    color: teal;
+}
+
+.sidebar-menu .fa-blender-phone {
+    color: #7d3c98;
+}
+
+.sidebar-menu .fa-globe {
+    color: #34495e;
+}
+
+.sidebar-menu .fa-clipboard {
+    color: salmon;
+}
+
+.sidebar-menu .fa-calculator {
+    color: #2e8b57;
+}
+
+.sidebar-menu .fa-file-invoice {
+    color: blue;
+}
+
+.sidebar-menu .fa-scroll {
+    color: #ff1493;
+}
+
+.sidebar-menu .fa-money-check-alt {
+    color: #9acd32;
+}
+
+.sidebar-menu .fa-list-ol {
+    color: #260bef;
+}
+
+.sidebar-menu .fa-clipboard-check {
+    color: #db8803;
+}
+
+.sidebar-menu .fa-language {
+    color: brown;
+}
+
+.sidebar-menu .fa-globe-asia {
+    color: coral;
+}
 
 /* Font Awesome lg class */
 .fa-lg {
@@ -557,18 +670,18 @@ body {
 }
 
 /* Active menu styling */
-.sidebar-menu li.active > a {
+.sidebar-menu li.active>a {
     background-color: #6777ef !important;
     color: #fff !important;
 }
 
-.sidebar-menu li.active > a i {
+.sidebar-menu li.active>a i {
     color: #fff !important;
 }
 
 /* Dropdown menu links active styling */
-body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li.active > a,
-body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li > a:focus {
+body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li.active>a,
+body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li>a:focus {
     background-color: #fff !important;
     color: #6777ef;
 }
@@ -586,38 +699,558 @@ body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li > a:focus
 }
 
 /* Dashboard Cards Gradients */
-.d-total-one-border { border-top: 2px solid #0093e9; }
-.d-total-one-bg { 
+.d-total-one-border {
+    border-top: 2px solid #0093e9;
+}
+
+.d-total-one-bg {
     background-color: #0093e9;
     background-image: linear-gradient(135deg, #0093e9 0%, #80d0c7 100%);
 }
 
-.d-total-two-border { border-top: 2px solid #f6d365; }
+.d-total-two-border {
+    border-top: 2px solid #f6d365;
+}
+
 .d-total-two-bg {
     background-color: #f6d365;
     background-image: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
 }
 
-.d-total-three-border { border-top: 2px solid #667eea; }
+.d-total-three-border {
+    border-top: 2px solid #667eea;
+}
+
 .d-total-three-bg {
     background-color: #667eea;
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.d-total-four-border { border-top: 2px solid #6a11cb; }
+.d-total-four-border {
+    border-top: 2px solid #6a11cb;
+}
+
 .d-total-four-bg {
     background-color: #6a11cb;
     background-image: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
 }
 
-.d-total-five-border { border-top: 2px solid #4481eb; }
+.d-total-five-border {
+    border-top: 2px solid #4481eb;
+}
+
 .d-total-five-bg {
     background-color: #4481eb;
     background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);
 }
 
-.d-total-six-border { border-top: 2px solid #fc6076; }
+.d-total-six-border {
+    border-top: 2px solid #fc6076;
+}
+
 .d-total-six-bg {
     background-color: #fc6076;
     background-image: linear-gradient(135deg, #fc6076 0%, #ff9a44 100%);
+}
+
+/* ========================================= */
+/* Missing Laravel CSS Classes              */
+/* ========================================= */
+
+/* Progress bar height - exact match from Laravel */
+.height-25 {
+    height: 18px !important;
+}
+
+/* User card view height - exact match */
+.user-card-view {
+    height: 190px;
+}
+
+/* Card member mobile height */
+@media screen and (max-width: 767px) {
+    .user-card-mbl-height {
+        height: 230px !important;
+    }
+}
+
+/* Progress bar styling */
+.progress-bar-mini {
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+/* Progress finance status */
+.progress-finance-status {
+    margin-bottom: 15px;
+}
+
+/* User card index padding - exact match */
+.user-card-index {
+    padding: 15px 15px 2px !important;
+}
+
+/* uAvatar mobile size */
+@media screen and (max-width: 425px) {
+    .uAvatar {
+        height: 40px !important;
+        width: 40px !important;
+    }
+}
+
+/* Card height for members */
+.card-height {
+    height: 165px;
+}
+
+/* Position for action dropdown on mobile */
+.position-xs-bottom {
+    position: relative;
+}
+
+/* Dashboard card CSS */
+.dashboard-card-css {
+    margin-bottom: 1rem;
+}
+
+/* Card stats items flex */
+.d-stat-items-flex {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.d-stat-item-flex {
+    flex: 1;
+    text-align: center;
+    min-width: 60px;
+}
+
+@media screen and (max-width: 425px) {
+    .d-stat-items-flex {
+        flex-wrap: wrap !important;
+        height: auto !important;
+    }
+
+    .d-stat-items-flex .d-stat-item-flex {
+        flex: 1 0 35%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Card statistic 2 - exact match from Laravel Stisla */
+.card-statistic-2 {
+    position: relative;
+    padding-bottom: 0;
+}
+
+.card-statistic-2 .card-icon {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 22px;
+    position: absolute;
+    right: 20px;
+    top: -20px;
+    border-radius: 3px;
+    text-align: center;
+    color: #fff;
+}
+
+.card-statistic-2 .card-wrap {
+    padding: 15px 25px;
+}
+
+.card-statistic-2 .card-wrap .card-header {
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.card-statistic-2 .card-wrap .card-header h4 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #98a6ad;
+    margin: 0;
+}
+
+.card-statistic-2 .card-wrap .card-body {
+    padding: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #34395e;
+}
+
+.card-statistic-2 .card-stats {
+    padding: 15px 25px;
+}
+
+.card-statistic-2 .card-stats-title {
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.card-statistic-2 .card-stats-items {
+    display: flex;
+    height: 40px;
+}
+
+.card-statistic-2 .card-stats-item {
+    flex: 1;
+    text-align: center;
+}
+
+.card-statistic-2 .card-stats-item-count {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+/* m-section class */
+.m-section {
+    padding: 25px;
+}
+
+@media (max-width: 320px) {
+    .m-section {
+        padding: 16px !important;
+    }
+}
+
+/* Section header item align right */
+.section .section-header.item-align-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Extra large screens - 4 columns */
+@media screen and (min-width: 1550px) {
+    .extra-large {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+    }
+}
+
+/* Select2 mobile margin */
+.select2-mobile-margin {
+    margin-right: 15px;
+}
+
+@media (max-width: 615px) {
+    .section .item-align-right .float-right {
+        display: flex !important;
+        justify-content: flex-end !important;
+        margin-top: 15px !important;
+        width: 100% !important;
+    }
+
+    .section .item-align-right .float-right .select2-mobile-margin {
+        margin-right: 0 !important;
+    }
+}
+
+/* Contract table background color */
+.contract-table-bg-color {
+    background-color: #6777ef;
+}
+
+/* Font size 12px for small icons */
+.font-size-12px {
+    font-size: 12px;
+}
+
+/* ========================================= */
+/* Additional Laravel CSS Classes           */
+/* ========================================= */
+
+/* Main sidebar styling - exact match */
+.main-sidebar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    background-color: #fff;
+}
+
+.main-sidebar .sidebar-menu li.menu-header,
+.main-sidebar .sidebar-menu li a {
+    color: #78828a;
+}
+
+/* Member card styling */
+.user-card-name {
+    height: auto;
+    overflow: hidden;
+    width: 150px;
+}
+
+.card-member-role {
+    font-size: 12px;
+    font-weight: 600;
+    height: auto;
+    letter-spacing: .5px;
+    line-height: 20px !important;
+    overflow: hidden;
+    width: 180px;
+}
+
+.card-user-email {
+    color: #000;
+    font-size: 12px;
+    font-weight: 600;
+    height: auto;
+    letter-spacing: .5px;
+    line-height: 20px !important;
+    overflow: hidden;
+    width: auto;
+}
+
+.member-card-toggle {
+    margin-bottom: -10px;
+}
+
+/* Email verification icons */
+.email-verified {
+    color: #6be295;
+    font-size: 15px;
+}
+
+.email-not-verified {
+    color: #de3939;
+    font-size: 15px;
+}
+
+.email-verified-btn {
+    font-size: 12px;
+}
+
+/* Notification toggle action dropdown */
+.notification-toggle.action-dropdown {
+    margin-left: auto !important;
+    position: sticky !important;
+}
+
+.notification-toggle.action-dropdown i {
+    margin: 0 !important;
+}
+
+/* Badge padding */
+.badge-padding {
+    padding: 3px 5px !important;
+}
+
+/* Member badge */
+.member-badge {
+    font-size: 10px;
+    padding: 5px;
+}
+
+/* Thumbnail preview */
+.thumbnail-preview {
+    height: 70px;
+    max-width: max-content;
+}
+
+/* Image file upload button */
+.image__file-upload {
+    background: #6777ef;
+    border-color: #6777ef;
+    border-radius: .25rem;
+    color: #fff;
+    display: table;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.image__file-upload:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Profile label color */
+.profile-label-color {
+    color: #34395e;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+
+/* Section title */
+.section-title {
+    font-size: 18px;
+    color: #34395e;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Permission text styling */
+.permission-text {
+    font-size: 14px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1500px) {
+    .permission-text {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+/* Anchor underline removal */
+.anchor-underline {
+    text-decoration: none !important;
+}
+
+.anchor-underline:hover {
+    text-decoration: none !important;
+}
+
+/* Card styling for Livewire cards */
+.livewire-card {
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.livewire-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Action toggle margin right */
+.action-toggle-mr {
+    margin-right: 0;
+}
+
+/* Card toggle margin right */
+.card-toggle-mr {
+    margin-right: 10px;
+}
+
+/* d-sm-flex-wrap-0 helper */
+.d-sm-flex-wrap-0 {
+    flex-wrap: nowrap;
+}
+
+/* Author box left styling */
+.author-box-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Custom control styling */
+.custom-control-label::before {
+    background-color: #e4e6fc;
+    border-color: #e4e6fc;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #6777ef;
+    border-color: #6777ef;
+}
+
+/* Rounded circle */
+.rounded-circle {
+    border-radius: 50% !important;
+}
+
+/* Form button styling */
+.form-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* Required field indicator */
+.required {
+    color: red;
+}
+
+/* Change password wrap */
+.change-pass-wrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Return to admin icon */
+.return_to_admin {
+    font-size: 20px !important;
+}
+
+.text-warning-all {
+    color: #ffc107 !important;
+}
+
+/* Dropdown title */
+.dropdown-title {
+    padding: 10px 15px;
+    font-weight: 600;
+    color: #34395e;
+}
+
+/* Empty state notification */
+.empty-notification {
+    text-align: center;
+    padding: 40px;
+}
+
+.empty-notification h2 {
+    font-size: 18px;
+    color: #98a6ad;
+}
+
+.empty-state-icon {
+    font-size: 40px;
+    color: #e4e6fc;
+}
+
+/* Search result styling */
+.search-result {
+    display: none;
+}
+
+.search-backdrop {
+    display: none;
+}
+
+/* Contracts table styling */
+.table thead.contract-table-bg-color th {
+    color: #fff;
+    border: none;
+}
+
+/* Dashboard card responsiveness */
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+    .dashboard-card-css {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Livewire search styling */
+@media screen and (max-width: 430px) {
+    .livewire-search {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2px;
+    }
+
+    .m-r-0 {
+        margin-right: 0 !important;
+    }
+
+    .m-t-10 {
+        margin-top: 10px;
+    }
+}
+
+/* SR only - screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
