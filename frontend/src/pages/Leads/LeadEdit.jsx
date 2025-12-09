@@ -152,9 +152,7 @@ const LeadEdit = () => {
             <div className="section-header">
                 <h1>Edit Lead</h1>
                 <div className="section-header-breadcrumb">
-                    <div className="breadcrumb-item"><Link to="/dashboard">Dashboard</Link></div>
-                    <div className="breadcrumb-item"><Link to="/leads">Leads</Link></div>
-                    <div className="breadcrumb-item active">Edit Lead</div>
+                    <Link to="/leads" className="btn btn-primary form-btn float-right-mobile">Back</Link>
                 </div>
             </div>
 
