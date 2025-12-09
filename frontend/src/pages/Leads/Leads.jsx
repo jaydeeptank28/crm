@@ -142,12 +142,12 @@ const Leads = () => {
                 </div>
                 <div className="float-right d-flex flex-lg-nowrap flex-wrap">
                     <div className="custom-sm-width">
-                        <Link to="/leads/kanban" className="btn btn-warning form-btn mr-2 text-nowrap mt-lg-0 mt-2">
+                        <Link to="/lead-kanban" className="btn btn-warning form-btn mr-2 text-nowrap mt-lg-0 mt-2">
                             Kanban View
                         </Link>
                     </div>
                     <div>
-                        <Link to="/leads/chart" className="btn btn-info form-btn mr-2 mt-lg-0 mt-2">
+                        <Link to="/lead-chart" className="btn btn-info form-btn mr-2 mt-lg-0 mt-2">
                             Chart
                         </Link>
                     </div>
