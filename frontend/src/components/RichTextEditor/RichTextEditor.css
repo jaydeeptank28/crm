@@ -1,0 +1,65 @@
+/* RichTextEditor CSS - Clean, minimal styling matching our design */
+
+.rich-text-editor-wrapper {
+    width: 100%;
+}
+
+/* Quill container styling */
+.rich-text-editor-wrapper .ql-container {
+    min-height: 200px;
+    font-size: 14px;
+    font-family: inherit;
+    border: 1px solid #e4e6fc;
+    border-top: none;
+    border-radius: 0 0 0.25rem 0.25rem;
+}
+
+/* Toolbar styling */
+.rich-text-editor-wrapper .ql-toolbar {
+    background-color: #f8f9fa;
+    border: 1px solid #e4e6fc;
+    border-radius: 0.25rem 0.25rem 0 0;
+    padding: 8px;
+}
+
+/* Editor area */
+.rich-text-editor-wrapper .ql-editor {
+    min-height: 180px;
+    padding: 15px;
+    line-height: 1.6;
+}
+
+/* Placeholder styling */
+.rich-text-editor-wrapper .ql-editor.ql-blank::before {
+    font-style: normal;
+    color: #6c757d;
+}
+
+/* Toolbar button hover */
+.rich-text-editor-wrapper .ql-toolbar button:hover,
+.rich-text-editor-wrapper .ql-toolbar button:focus {
+    color: #6777ef;
+}
+
+/* Active button */
+.rich-text-editor-wrapper .ql-toolbar button.ql-active {
+    color: #6777ef;
+}
+
+/* Dropdown styling */
+.rich-text-editor-wrapper .ql-toolbar .ql-picker-label:hover,
+.rich-text-editor-wrapper .ql-toolbar .ql-picker-item:hover {
+    color: #6777ef;
+}
+
+/* Focus state */
+.rich-text-editor-wrapper .ql-container.ql-snow:focus-within {
+    border-color: #6777ef;
+}
+
+/* Prevent any shaking/animations */
+.rich-text-editor-wrapper,
+.rich-text-editor-wrapper * {
+    transition: none !important;
+    animation: none !important;
+}

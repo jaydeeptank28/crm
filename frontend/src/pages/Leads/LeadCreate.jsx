@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
-import SummernoteEditor from '../../components/SummernoteEditor/SummernoteEditor';
+import RichTextEditor from '../../components/RichTextEditor/RichTextEditor';
 import './Leads.css';
 
 const LeadCreate = () => {
@@ -380,7 +380,7 @@ const LeadCreate = () => {
                                 <div className="col-md-12">
                                     <div className="form-group col-sm-12">
                                         <label htmlFor="description">Description:</label>
-                                        <SummernoteEditor
+                                        <RichTextEditor
                                             id="leadDescription"
                                             value={formData.description}
                                             onChange={handleDescriptionChange}

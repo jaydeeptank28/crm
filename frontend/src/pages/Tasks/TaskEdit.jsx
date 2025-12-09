@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
-import SummernoteEditor from '../../components/SummernoteEditor/SummernoteEditor';
+import RichTextEditor from '../../components/RichTextEditor/RichTextEditor';
 import './Tasks.css';
 
 const TaskEdit = () => {
@@ -353,7 +353,7 @@ const TaskEdit = () => {
                                 {/* Description */}
                                 <div className="form-group col-sm-12 mb-0">
                                     <label htmlFor="description">Description:</label>
-                                    <SummernoteEditor
+                                    <RichTextEditor
                                         id="taskDescription"
                                         value={formData.description}
                                         onChange={handleDescriptionChange}
