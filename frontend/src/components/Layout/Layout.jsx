@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Sidebar from './Sidebar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import api from '../../services/api';
+import './Layout.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Layout = ({ children }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [showSearchResults, setShowSearchResults] = useState(false);
 
     useEffect(() => {
         // Get user from localStorage or API
@@ -32,6 +37,36 @@ const Layout = ({ children }) => {
         document.body.classList.toggle('sidebar-mini');
     };
 
+    // Search functionality - matches PHP custom.js
+    const handleSearchKeyup = useCallback(async (e) => {
+        const searchData = e.target.value;
+        setSearchQuery(searchData);
+
+        if (searchData.trim() !== '') {
+            setShowSearchResults(true);
+            try {
+                const response = await api.get('/customers/search', {
+                    params: { searchData }
+                });
+                if (response.data.success) {
+                    setSearchResults(response.data.data || []);
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                setSearchResults([]);
+            }
+        } else {
+            setSearchResults([]);
+            setShowSearchResults(false);
+        }
+    }, []);
+
+    const closeSearchResults = () => {
+        setShowSearchResults(false);
+        setSearchQuery('');
+        setSearchResults([]);
+    };
+
     return (
         <div id="app">
             <div className="main-wrapper main-wrapper-1">
@@ -52,15 +87,48 @@ const Layout = ({ children }) => {
                             </li>
                         </ul>
                         <div className="search-element">
-                            <input className="form-control search-input-css" type="text" id="searchCustomer" disabled
-                                placeholder="Search Customers..." aria-label="Search" autoComplete="off" />
-                            <button className="btn" type="submit"><i className="fas fa-search"></i></button>
-                            <div className="search-backdrop"></div>
-                            <div className="search-result search-result-mobile-w">
+                            <input
+                                className="form-control search-input-css"
+                                type="text"
+                                id="searchCustomer"
+                                placeholder="Search Customers..."
+                                aria-label="Search"
+                                autoComplete="off"
+                                value={searchQuery}
+                                onChange={handleSearchKeyup}
+                                onFocus={() => searchQuery && setShowSearchResults(true)}
+                            />
+                            <button className="btn" type="submit" onClick={(e) => e.preventDefault()}>
+                                <i className="fas fa-search"></i>
+                            </button>
+                            {showSearchResults && <div className="search-backdrop" onClick={closeSearchResults}></div>}
+                            <div className={`search-result search-result-mobile-w ${showSearchResults ? 'show' : ''}`}
+                                style={{ visibility: showSearchResults ? 'visible' : 'hidden', opacity: showSearchResults ? 1 : 0 }}>
                                 <div id="customerName" className="py-2">
-                                    <h6 className="py-1 px-3 my-0">
-                                        <i className="fab fa fa-search text-primary"></i> Search Results
-                                    </h6>
+                                    {searchResults.length > 0 ? (
+                                        searchResults.map(customer => (
+                                            <div key={customer.id} className="search-item mb-2 mt-1">
+                                                <Link to={`/customers/${customer.id}`} className="py-0" onClick={closeSearchResults}>
+                                                    <div className="search-icon bg-primary text-white mr-3">
+                                                        {customer.company_name?.substring(0, 1) || 'C'}
+                                                    </div>
+                                                    <div className="customer-name-css">
+                                                        {customer.company_name}
+                                                    </div>
+                                                </Link>
+                                                {customer.website && (
+                                                    <a href={customer.website} className="anchor-underline customer-website-name-css mb-2" target="_blank" rel="noopener noreferrer">
+                                                        {customer.website}
+                                                    </a>
+                                                )}
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <h6 className="py-1 px-3 my-0">
+                                            <i className="fab fa fa-search text-primary"></i>{' '}
+                                            {searchQuery ? 'No matching records found' : 'Search Results'}
+                                        </h6>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -129,8 +197,8 @@ const Layout = ({ children }) => {
                     </ul>
                 </nav>
 
-                {/* Sidebar - Exact match to layouts/sidebar.blade.php structure */}
-                <div className="main-sidebar sidebar-style-2">
+                {/* Sidebar - PHP uses main-sidebar (NOT sidebar-style-2) */}
+                <div className="main-sidebar">
                     <Sidebar />
                 </div>
 

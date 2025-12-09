@@ -1,0 +1,225 @@
+/* Sidebar CSS - Matching PHP custom.css EXACTLY */
+
+/* Main sidebar - PHP exact */
+.main-sidebar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+}
+
+.main-sidebar,
+body.sidebar-mini .main-sidebar:after {
+    background-color: #fff;
+}
+
+/* Sidebar menu colors */
+.main-sidebar .sidebar-menu li.menu-header,
+.main-sidebar .sidebar-menu li a {
+    color: #78828a;
+}
+
+/* Sidebar sticky - PHP exact */
+.sidebar-sticky {
+    background: #fff !important;
+    left: 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 999 !important;
+}
+
+.sidebar-bottom-padding {
+    padding-bottom: 115px !important;
+}
+
+/* Sidebar search box */
+.sidebar-search-box {
+    margin-left: 10px !important;
+    width: 90% !important;
+}
+
+/* Search close/show signs */
+.close-sign,
+.no-results {
+    display: none;
+}
+
+/* Menu text wrap */
+.menu-text-wrap {
+    width: 206px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* Icon sizes */
+.fa-lg {
+    font-size: 1.33333em !important;
+}
+
+/* Sidebar menu icon colors - PHP custom.css exact */
+.sidebar-menu .fa-ticket-alt {
+    color: #e6b86e;
+}
+
+.sidebar-menu .fa-erlang {
+    color: #37cfe7;
+}
+
+.sidebar-menu .fa-tty {
+    color: #3498db;
+}
+
+.sidebar-menu .fa-tasks {
+    color: red;
+}
+
+.sidebar-menu .fa-tags {
+    color: #f804c7;
+}
+
+.sidebar-menu .fa-user-friends {
+    color: #37e339;
+}
+
+.sidebar-menu .fa-street-view {
+    color: maroon;
+}
+
+.sidebar-menu .fa-object-group {
+    color: #5cfa0d;
+}
+
+.sidebar-menu .fa-file-signature {
+    color: #74872c;
+}
+
+.sidebar-menu .fa-file-contract {
+    color: #eb2f35;
+}
+
+.sidebar-menu .fa-stripe-s {
+    color: #f1db12;
+}
+
+.sidebar-menu .fa-cogs {
+    color: #ff1493;
+}
+
+.sidebar-menu .fa-sticky-note {
+    color: #06efef;
+}
+
+.sidebar-menu .fa-reply {
+    color: #d2691e;
+}
+
+.sidebar-menu .fa-info-circle {
+    color: #b5b509;
+}
+
+.sidebar-menu .fa-layer-group {
+    color: navy;
+}
+
+.sidebar-menu .fa-tachometer-alt {
+    color: blue;
+}
+
+.sidebar-menu .fa-speakap {
+    color: #4b064e;
+}
+
+.sidebar-menu .fa-columns {
+    color: #09ef21;
+}
+
+.sidebar-menu .fa-product-hunt {
+    color: #6a2ff6;
+}
+
+.sidebar-menu .fa-bullhorn {
+    color: #f99f0b;
+}
+
+.sidebar-menu .fa-sitemap {
+    color: #573a0b;
+}
+
+.sidebar-menu .fa-percent {
+    color: #000;
+}
+
+.sidebar-menu .fa-bullseye {
+    color: #6ee6da;
+}
+
+.sidebar-menu .fa-people-arrows {
+    color: #006400;
+}
+
+.sidebar-menu .fa-edit {
+    color: #e6b86e;
+}
+
+.sidebar-menu .fa-autoprefixer {
+    color: teal;
+}
+
+.sidebar-menu .fa-blender-phone {
+    color: #7d3c98;
+}
+
+.sidebar-menu .fa-globe {
+    color: #34495e;
+}
+
+.sidebar-menu .fa-clipboard {
+    color: salmon;
+}
+
+.sidebar-menu .fa-calculator {
+    color: #2e8b57;
+}
+
+.sidebar-menu .fa-file-invoice {
+    color: blue;
+}
+
+.sidebar-menu .fa-scroll {
+    color: #ff1493;
+}
+
+.sidebar-menu .fa-money-check-alt {
+    color: #9acd32;
+}
+
+.sidebar-menu .fa-list-ol {
+    color: #260bef;
+}
+
+.sidebar-menu .fa-clipboard-check {
+    color: #db8803;
+}
+
+.sidebar-menu .fa-language {
+    color: brown;
+}
+
+.sidebar-menu .fa-globe-asia {
+    color: coral;
+}
+
+/* Active submenu styling - PHP exact */
+body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li.active>a,
+body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li.active>a:hover,
+body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li>a:focus {
+    background-color: #fff !important;
+    color: #6777ef;
+}
+
+/* Line height fix */
+.line-height-0 {
+    line-height: unset !important;
+}
+
+.padding-bottom-zero {
+    padding-bottom: 0 !important;
+}
