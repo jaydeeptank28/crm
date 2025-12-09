@@ -103,13 +103,14 @@ const Members = () => {
 
         if (result.isConfirmed) {
             try {
-                await api.delete(`/members/${id}`);
+                const response = await api.delete(`/members/${id}`);
                 // Remove from local state immediately for better UX
                 setMembers(members.filter(m => m.id !== id));
                 Swal.fire('Deleted!', 'Member has been deleted.', 'success');
             } catch (error) {
                 console.error('Error deleting member:', error);
-                Swal.fire('Error', 'Failed to delete member', 'error');
+                const errorMsg = error.response?.data?.message || error.response?.data?.error || error.message || 'Failed to delete member';
+                Swal.fire('Error', errorMsg, 'error');
             }
         }
     };

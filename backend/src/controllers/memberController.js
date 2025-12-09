@@ -260,7 +260,6 @@ export const createMember = async (req, res) => {
             });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Handle file upload if present
         let imageName = null;
@@ -272,7 +271,7 @@ export const createMember = async (req, res) => {
             first_name,
             last_name: last_name || null,
             email,
-            password: hashedPassword,
+            password: password, // Plain text - User model will hash it automatically
             phone: phone ? phone.replace(/\s/g, '') : null,
             facebook: facebook || null,
             linkedin: linkedin || null,
@@ -510,60 +509,52 @@ export const deleteMember = async (req, res) => {
             deleteFile(imagePath);
         }
 
-        // CASCADE DELETE
-        try {
-            await sequelize.query(`DELETE FROM proposals WHERE created_by = :userId`,
-                { replacements: { userId: id }, type: QueryTypes.DELETE, transaction });
-        } catch (e) { }
+        // CASCADE DELETE - Run OUTSIDE transaction because in PostgreSQL any failed query aborts the whole transaction
+        // These are optional cleanup - if tables don't exist or no matching records, that's fine
+        const cascadeQueries = [
+            'DELETE FROM project_members WHERE user_id = $1',
+            'DELETE FROM proposals WHERE created_by = $1',
+            'DELETE FROM goal_members WHERE user_id = $1',
+            'DELETE FROM projects WHERE created_by = $1',
+            'DELETE FROM model_has_permissions WHERE model_id = $1 AND model_type = \'App\\\\Models\\\\User\'',
+            'DELETE FROM model_has_roles WHERE model_id = $1 AND model_type = \'App\\\\Models\\\\User\'',
+        ];
 
-        try {
-            await sequelize.query(`DELETE FROM goal_members WHERE user_id = :userId`,
-                { replacements: { userId: id }, type: QueryTypes.DELETE, transaction });
-        } catch (e) { }
+        for (const sql of cascadeQueries) {
+            try {
+                await sequelize.query(sql, { bind: [id], type: QueryTypes.DELETE });
+            } catch (e) {
+                // Ignore - table might not exist or no matching records
+            }
+        }
 
-        try {
-            await sequelize.query(`DELETE FROM projects WHERE created_by = :userId`,
-                { replacements: { userId: id }, type: QueryTypes.DELETE, transaction });
-        } catch (e) { }
-
-        try {
-            await sequelize.query(`DELETE FROM model_has_permissions WHERE model_id = :userId AND model_type = 'App\\\\Models\\\\User'`,
-                { replacements: { userId: id }, type: QueryTypes.DELETE, transaction });
-        } catch (e) { }
-
-        try {
-            await sequelize.query(`DELETE FROM model_has_roles WHERE model_id = :userId AND model_type = 'App\\\\Models\\\\User'`,
-                { replacements: { userId: id }, type: QueryTypes.DELETE, transaction });
-        } catch (e) { }
-
-        // Activity log
-        try {
-            await sequelize.query(`
-                INSERT INTO activity_log (log_name, description, subject_type, subject_id, causer_type, causer_id, properties, created_at, updated_at)
-                VALUES ('Member deleted.', :description, 'App\\\\Models\\\\User', :subjectId, 'App\\\\Models\\\\User', :causerId, '{}', NOW(), NOW())
-            `, {
-                replacements: {
-                    description: `${memberName} Member deleted.`,
-                    subjectId: id,
-                    causerId: req.user?.id || 1
-                },
-                type: QueryTypes.INSERT,
-                transaction
-            });
-        } catch (e) { }
-
+        // Delete the member - no foreign key manipulation needed since we cleaned up related records above
         await member.destroy({ transaction });
 
         await transaction.commit();
+
+        // Activity log - do AFTER commit so it doesn't affect the delete transaction
+        try {
+            await sequelize.query(
+                `INSERT INTO activity_log (log_name, description, subject_type, subject_id, causer_type, causer_id, properties, created_at, updated_at)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW())`,
+                {
+                    bind: ['Member deleted.', `${memberName} deleted.`, 'App\\Models\\User', id, 'App\\Models\\User', req.user?.id || 1, '{}'],
+                    type: QueryTypes.INSERT
+                }
+            );
+        } catch (e) {
+            console.log('Activity log insert error (non-fatal):', e.message);
+        }
 
         res.json({
             success: true,
             message: 'Member deleted successfully.'
         });
     } catch (error) {
-        await transaction.rollback();
+        try { await transaction.rollback(); } catch (e) { }
         console.error('Error deleting member:', error);
-        res.status(500).json({ success: false, message: 'Server Error', error: error.message });
+        res.status(500).json({ success: false, message: error.message || 'Server Error' });
     }
 };
 
