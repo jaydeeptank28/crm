@@ -10,6 +10,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@hello-pangea/dnd": "^18.0.1",
         "axios": "^1.6.8",
         "bootstrap": "^4.6.2",
         "chart.js": "^4.5.1",

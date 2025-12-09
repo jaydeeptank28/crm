@@ -33,13 +33,13 @@ const LeadSources = () => {
         return () => clearTimeout(searchTimeout.current);
     }, [search]);
 
-    const fetchSources = async () => {
+    const fetchSources = async (pageOverride = null, searchOverride = null) => {
         setLoading(true);
         try {
             const response = await api.get('/leads/sources/paginated', {
                 params: {
-                    page: pagination.page,
-                    search
+                    page: pageOverride !== null ? pageOverride : pagination.page,
+                    search: searchOverride !== null ? searchOverride : search
                 }
             });
             if (response.data.success) {
@@ -95,8 +95,8 @@ const LeadSources = () => {
                     showConfirmButton: false
                 });
                 setShowAddModal(false);
-                fetchSources();
                 resetForm();
+                fetchSources(1, '');
             }
         } catch (error) {
             if (error.response?.data?.message) {
@@ -123,8 +123,8 @@ const LeadSources = () => {
                     showConfirmButton: false
                 });
                 setShowEditModal(false);
-                fetchSources();
                 resetForm();
+                fetchSources(1, '');
             }
         } catch (error) {
             if (error.response?.data?.message) {
@@ -151,7 +151,7 @@ const LeadSources = () => {
                 const response = await api.delete(`/leads/sources/${id}`);
                 if (response.data.success) {
                     Swal.fire('Deleted!', 'Lead source has been deleted.', 'success');
-                    fetchSources();
+                    fetchSources(1, '');
                 }
             } catch (error) {
                 Swal.fire('Error', error.response?.data?.message || 'Failed to delete lead source', 'error');

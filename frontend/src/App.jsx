@@ -12,6 +12,8 @@ import LeadEdit from './pages/Leads/LeadEdit';
 import LeadDetail from './pages/Leads/LeadDetail';
 import LeadStatuses from './pages/Leads/LeadStatuses';
 import LeadSources from './pages/Leads/LeadSources';
+import LeadChart from './pages/Leads/LeadChart';
+import LeadKanban from './pages/Leads/LeadKanban';
 import Layout from './components/Layout/Layout';
 
 // Protected Route - redirects to login if not authenticated, wraps with Layout
@@ -75,10 +77,27 @@ function App() {
                         <LeadStatuses />
                     </ProtectedRoute>
                 } />
+                <Route path="/lead-statuses" element={
+                    <ProtectedRoute>
+                        <LeadStatuses />
+                    </ProtectedRoute>
+                } />
                 {/* Lead Sources Routes */}
                 <Route path="/lead-sources" element={
                     <ProtectedRoute>
                         <LeadSources />
+                    </ProtectedRoute>
+                } />
+                {/* Lead Chart Route */}
+                <Route path="/lead-chart" element={
+                    <ProtectedRoute>
+                        <LeadChart />
+                    </ProtectedRoute>
+                } />
+                {/* Lead Kanban Route */}
+                <Route path="/lead-kanban" element={
+                    <ProtectedRoute>
+                        <LeadKanban />
                     </ProtectedRoute>
                 } />
                 {/* Leads Routes */}
@@ -109,3 +128,4 @@ function App() {
 }
 
 export default App;
+

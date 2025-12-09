@@ -25,33 +25,38 @@ export const getLeadSourcesPaginated = async (req, res) => {
         const search = req.query.search || '';
         const offset = (page - 1) * limit;
 
-        // Build search condition
-        let whereClause = '';
+        // Build where conditions
+        const whereConditions = {};
         if (search) {
-            whereClause = `WHERE ls.name ILIKE '%${search.replace(/'/g, "''")}%'`;
+            whereConditions.name = { [sequelize.Sequelize.Op.iLike]: `%${search}%` };
         }
 
         // Get total count
-        const countResult = await sequelize.query(`
-            SELECT COUNT(*) as count
-            FROM lead_sources ls
-            ${whereClause}
-        `, { type: QueryTypes.SELECT });
-        const total = parseInt(countResult[0].count);
+        const total = await LeadSource.count({ where: whereConditions });
 
-        // Get paginated sources with leads count
-        const sources = await sequelize.query(`
-            SELECT ls.*, COALESCE(COUNT(l.id), 0) as leads_count
-            FROM lead_sources ls
-            LEFT JOIN leads l ON l.source_id = ls.id
-            ${whereClause}
-            GROUP BY ls.id
-            ORDER BY ls.name ASC
-            LIMIT :limit OFFSET :offset
-        `, {
-            replacements: { limit, offset },
-            type: QueryTypes.SELECT
+        // Get paginated sources
+        const sources = await LeadSource.findAll({
+            where: whereConditions,
+            limit,
+            offset,
+            order: [['name', 'ASC']],
+            raw: true
         });
+
+        // Get leads count for each source
+        const sourcesWithCount = await Promise.all(sources.map(async (source) => {
+            const leadsCount = await sequelize.query(
+                `SELECT COUNT(*) as count FROM leads WHERE source_id = :sourceId`,
+                {
+                    replacements: { sourceId: source.id },
+                    type: QueryTypes.SELECT
+                }
+            );
+            return {
+                ...source,
+                leads_count: parseInt(leadsCount[0]?.count || 0)
+            };
+        }));
 
         const pages = Math.ceil(total / limit);
         const from = total > 0 ? offset + 1 : 0;
@@ -60,7 +65,7 @@ export const getLeadSourcesPaginated = async (req, res) => {
         res.json({
             success: true,
             data: {
-                sources,
+                sources: sourcesWithCount,
                 pagination: {
                     total,
                     pages,
@@ -73,7 +78,7 @@ export const getLeadSourcesPaginated = async (req, res) => {
         });
     } catch (error) {
         console.error('Error fetching lead sources:', error);
-        res.status(500).json({ success: false, message: 'Server Error' });
+        res.status(500).json({ success: false, message: 'Server Error', error: error.message });
     }
 };
 

@@ -10,13 +10,12 @@
     vertical-align: middle;
 }
 
-/* Color Badge Circle */
-.badge-color-circle {
+/* Color Box - matches PHP template .colorBox */
+.colorBox {
+    width: 30px;
+    height: 20px;
     display: inline-block;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    vertical-align: middle;
+    border-radius: 3px;
 }
 
 /* Color Picker */

@@ -580,6 +580,55 @@ export const getKanbanData = async (req, res) => {
     }
 };
 
+/**
+ * Get chart data - leads converted to customers per day (current month)
+ */
+export const getChartData = async (req, res) => {
+    try {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth(); // 0-indexed
+
+        // Get first and last day of current month
+        const startOfMonth = new Date(year, month, 1);
+        const endOfMonth = new Date(year, month + 1, 0);
+
+        // Generate all dates in current month
+        const currentMonthDates = [];
+        const leads = [];
+
+        for (let d = new Date(startOfMonth); d <= endOfMonth; d.setDate(d.getDate() + 1)) {
+            const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+                .replace(/(\d+)\s(\w+)\s(\d+)/, (_, day, month, year) => {
+                    const suffix = ['th', 'st', 'nd', 'rd'][day % 10 > 3 ? 0 : (day % 100 - day % 10 != 10 ? day % 10 : 0)];
+                    return `${day}${suffix} ${month}, ${year}`;
+                });
+            currentMonthDates.push(dateStr);
+
+            // Count leads converted on this date
+            const dateOnly = new Date(d).toISOString().split('T')[0];
+            const count = await Lead.count({
+                where: {
+                    lead_convert_customer: 1,
+                    lead_convert_date: dateOnly
+                }
+            });
+            leads.push(count);
+        }
+
+        res.json({
+            success: true,
+            data: {
+                labels: currentMonthDates,
+                data: leads
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching chart data:', error);
+        res.status(500).json({ success: false, message: 'Server Error', error: error.message });
+    }
+};
+
 export default {
     getLeads,
     getLead,
@@ -588,5 +637,6 @@ export default {
     updateLead,
     deleteLead,
     changeStatus,
-    getKanbanData
+    getKanbanData,
+    getChartData
 };

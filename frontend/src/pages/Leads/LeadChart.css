@@ -1,0 +1,13 @@
+/* Lead Chart CSS */
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.contract-summary-heading {
+    font-weight: 600;
+    color: #34395e;
+    font-size: 1rem;
+}

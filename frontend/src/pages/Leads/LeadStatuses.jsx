@@ -190,10 +190,12 @@ const LeadStatuses = () => {
                                             <tr key={status.id}>
                                                 <td>{status.name}</td>
                                                 <td>
-                                                    <span
-                                                        className="badge badge-color-circle"
-                                                        style={{ backgroundColor: status.color || '#6777ef' }}
-                                                    ></span>
+                                                    {status.color ? (
+                                                        <div
+                                                            className="colorBox"
+                                                            style={{ background: status.color, border: '1px solid #6777ef' }}
+                                                        ></div>
+                                                    ) : 'N/A'}
                                                 </td>
                                                 <td>{status.order}</td>
                                                 <td>{status.leads_count || 0}</td>
