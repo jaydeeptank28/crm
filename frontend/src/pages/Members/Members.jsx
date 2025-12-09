@@ -201,19 +201,25 @@ const Members = () => {
                                                                 <h4>{strLimit(member.first_name, 12, '...')}</h4>
                                                             </Link>
                                                         </div>
+                                                        {/* Dropdown - matching PHP exactly */}
                                                         <a className="dropdown dropdown-list-toggle">
                                                             <a href="#" data-toggle="dropdown"
-                                                                className="notification-toggle action-dropdown d-none position-xs-bottom"
+                                                                className="notification-toggle action-dropdown position-xs-bottom"
                                                                 onClick={(e) => e.preventDefault()}>
                                                                 <i className="fas fa-ellipsis-v action-toggle-mr"></i>
                                                             </a>
                                                             <div className="dropdown-menu dropdown-menu-right">
                                                                 <div className="dropdown-list-content dropdown-list-icons">
-                                                                    <Link to={`/members/${member.id}/edit`} className="dropdown-item dropdown-item-desc edit-btn">
+                                                                    <Link to={`/members/${member.id}/edit`}
+                                                                        className="dropdown-item dropdown-item-desc edit-btn"
+                                                                        data-id={member.id}>
                                                                         <i className="fas fa-edit mr-2 card-edit-icon"></i> Edit
                                                                     </Link>
                                                                     {loggedInUserId !== member.id && (
-                                                                        <a href="#" className="dropdown-item dropdown-item-desc delete-btn" onClick={(e) => { e.preventDefault(); handleDelete(member.id); }}>
+                                                                        <a href="#"
+                                                                            className="dropdown-item dropdown-item-desc delete-btn"
+                                                                            data-id={member.id}
+                                                                            onClick={(e) => { e.preventDefault(); handleDelete(member.id); }}>
                                                                             <i className="fas fa-trash mr-2 card-delete-icon"></i> Delete
                                                                         </a>
                                                                     )}
@@ -240,6 +246,7 @@ const Members = () => {
                                                 </div>
                                             </div>
                                             <div className="card-body d-flex align-items-center pt-0 pl-3 ml-2">
+                                                {/* Status toggle - matching PHP exactly */}
                                                 {member.id !== loggedInUserId && (
                                                     <div className="mt-2 member-card-toggle card-toggle-mr">
                                                         <label className="custom-switch pl-0" data-placement="bottom"
@@ -262,13 +269,17 @@ const Members = () => {
                                                 {!member.email_verified_at ? (
                                                     <div className="ml-auto mt-1 member-card-toggle">
                                                         <button
-                                                            className="btn btn-danger btn-sm p-0 pl-1 pr-1 email-verify-btn mr-1"
+                                                            className="btn btn-danger btn-sm p-0 pl-1 pr-1 email-verify-btn"
+                                                            data-id={member.id}
+                                                            data-toggle="tooltip"
                                                             title="Email Verify"
                                                         >
                                                             <i className="fas fa-envelope font-size-12px"></i>
                                                         </button>
                                                         <button
                                                             className="btn btn-primary btn-sm p-0 pl-1 pr-1 email-btn"
+                                                            data-id={member.id}
+                                                            data-toggle="tooltip"
                                                             title="Resend Email Verification"
                                                             onClick={() => handleResendVerification(member.id)}
                                                         >

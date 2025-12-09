@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../../services/api';
+import Swal from 'sweetalert2';
 
 const MemberCreate = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [permissions, setPermissions] = useState({});
-    const [formData, setFormData] = useState({
+    const [errors, setErrors] = useState({}); // Validation errors state
+
+    // Initial form state for reset
+    const initialFormData = {
         first_name: '',
         last_name: '',
         email: '',
@@ -21,8 +25,10 @@ const MemberCreate = () => {
         send_welcome_email: false,
         permissions: [],
         image: null
-    });
-    const [imagePreview, setImagePreview] = useState('/assets/img/infyom-logo.png'); // Default placeholder
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
+    const [imagePreview, setImagePreview] = useState('/assets/img/infyom-logo.png');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
@@ -32,11 +38,8 @@ const MemberCreate = () => {
 
     const fetchCreateData = async () => {
         try {
-            // Need to fetch permissions and languages
-            // Assuming there's an endpoint for this or we just fetch permissions
             const permResponse = await api.get('/permissions');
             if (permResponse.data.success) {
-                // Use permissions object, not the entire data object
                 setPermissions(permResponse.data.data.permissions || {});
             }
         } catch (error) {
@@ -44,12 +47,28 @@ const MemberCreate = () => {
         }
     };
 
+    // Reset form to initial state
+    const resetForm = () => {
+        setFormData(initialFormData);
+        setImagePreview('/assets/img/infyom-logo.png');
+        setErrors({});
+        setPasswordVisible(false);
+        setConfirmPasswordVisible(false);
+        // Reset file input
+        const fileInput = document.getElementById('logo');
+        if (fileInput) fileInput.value = '';
+    };
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
 
+        // Clear error for this field when user types
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: null }));
+        }
+
         if (type === 'checkbox') {
             if (name === 'permissions') {
-                // Handle permissions array
                 const permissionId = parseInt(value);
                 setFormData(prev => {
                     const newPermissions = checked
@@ -58,7 +77,6 @@ const MemberCreate = () => {
                     return { ...prev, permissions: newPermissions };
                 });
             } else {
-                // Handle normal checkboxes
                 setFormData(prev => ({ ...prev, [name]: checked }));
             }
         } else {
@@ -79,14 +97,57 @@ const MemberCreate = () => {
     };
 
     const handlePhoneChange = (e) => {
-        // Only allow numbers
         const value = e.target.value.replace(/\D/g, "");
         setFormData(prev => ({ ...prev, phone: value }));
+        if (errors.phone) {
+            setErrors(prev => ({ ...prev, phone: null }));
+        }
+    };
+
+    // Client-side validation
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!formData.first_name.trim()) {
+            newErrors.first_name = 'First name is required';
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address';
+        }
+
+        if (!formData.password) {
+            newErrors.password = 'Password is required';
+        } else if (formData.password.length < 6) {
+            newErrors.password = 'Password must be at least 6 characters';
+        }
+
+        if (!formData.password_confirmation) {
+            newErrors.password_confirmation = 'Password confirmation is required';
+        } else if (formData.password !== formData.password_confirmation) {
+            newErrors.password_confirmation = 'Passwords do not match';
+        }
+
+        if (!formData.phone.trim()) {
+            newErrors.phone = 'Phone number is required';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Client-side validation
+        if (!validateForm()) {
+            return;
+        }
+
         setLoading(true);
+        setErrors({});
 
         const data = new FormData();
         Object.keys(formData).forEach(key => {
@@ -102,13 +163,48 @@ const MemberCreate = () => {
         });
 
         try {
-            await api.post('/members', data, {
+            const response = await api.post('/members', data, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            navigate('/members');
+
+            if (response.data.success) {
+                // Show success message
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Member created successfully',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+
+                // Reset form for next entry
+                resetForm();
+
+                // Navigate to members list
+                navigate('/members');
+            }
         } catch (error) {
             console.error('Error creating member:', error);
-            // Handle validation errors here if needed
+
+            // Handle validation errors from backend
+            if (error.response?.status === 422 && error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+
+                // Show error toast
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: error.response.data.message || 'Please check the form for errors',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error.response?.data?.message || 'Failed to create member'
+                });
+            }
         } finally {
             setLoading(false);
         }
@@ -133,12 +229,14 @@ const MemberCreate = () => {
                                     <input
                                         type="text"
                                         name="first_name"
-                                        className="form-control"
+                                        className={`form-control ${errors.first_name ? 'is-invalid' : ''}`}
                                         required
+                                        autoComplete="off"
                                         placeholder="First Name"
                                         value={formData.first_name}
                                         onChange={handleChange}
                                     />
+                                    {errors.first_name && <span className="text-danger">{errors.first_name}</span>}
                                 </div>
                                 <div className="form-group col-sm-6">
                                     <label>Last Name:</label>
@@ -146,6 +244,7 @@ const MemberCreate = () => {
                                         type="text"
                                         name="last_name"
                                         className="form-control"
+                                        autoComplete="off"
                                         placeholder="Last Name"
                                         value={formData.last_name}
                                         onChange={handleChange}
@@ -160,12 +259,14 @@ const MemberCreate = () => {
                                     <input
                                         type="email"
                                         name="email"
-                                        className="form-control"
+                                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                                         required
+                                        autoComplete="off"
                                         placeholder="Email"
                                         value={formData.email}
                                         onChange={handleChange}
                                     />
+                                    {errors.email && <span className="text-danger">{errors.email}</span>}
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label>Password:<span className="required">*</span></label>
@@ -173,19 +274,20 @@ const MemberCreate = () => {
                                         <input
                                             type={passwordVisible ? "text" : "password"}
                                             name="password"
-                                            className="form-control"
+                                            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                                             required
+                                            autoComplete="off"
                                             minLength="6"
                                             maxLength="10"
                                             placeholder="Password"
                                             value={formData.password}
                                             onChange={handleChange}
                                         />
-                                        <div className="input-group-append">
+                                        <div className="input-group-append" id="show_hide_password">
                                             <div className="input-group-text">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-default p-0"
+                                                    className="btn btn-default password-show p-0"
                                                     onClick={() => setPasswordVisible(!passwordVisible)}
                                                 >
                                                     <i className={`fa fa-eye${!passwordVisible ? '-slash' : ''}`} aria-hidden="true"></i>
@@ -193,6 +295,7 @@ const MemberCreate = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    {errors.password && <span className="text-danger">{errors.password}</span>}
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label>Confirm Password:<span className="required">*</span></label>
@@ -200,19 +303,20 @@ const MemberCreate = () => {
                                         <input
                                             type={confirmPasswordVisible ? "text" : "password"}
                                             name="password_confirmation"
-                                            className="form-control"
+                                            className={`form-control ${errors.password_confirmation ? 'is-invalid' : ''}`}
                                             required
+                                            autoComplete="off"
                                             minLength="6"
                                             maxLength="10"
                                             placeholder="Confirm Password"
                                             value={formData.password_confirmation}
                                             onChange={handleChange}
                                         />
-                                        <div className="input-group-append">
+                                        <div className="input-group-append" id="show_hide_cPassword">
                                             <div className="input-group-text">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-default p-0"
+                                                    className="btn btn-default cPassword-show p-0"
                                                     onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
                                                 >
                                                     <i className={`fa fa-eye${!confirmPasswordVisible ? '-slash' : ''}`} aria-hidden="true"></i>
@@ -220,21 +324,26 @@ const MemberCreate = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    {errors.password_confirmation && <span className="text-danger">{errors.password_confirmation}</span>}
                                 </div>
                             </div>
 
                             {/* Row 3 */}
                             <div className="row">
                                 <div className="form-group col-sm-6">
-                                    <label>Phone:<span className="required">*</span></label>
+                                    <label>Phone:<span className="required">*</span></label><br/>
                                     <input
                                         type="tel"
                                         name="phone"
-                                        className="form-control"
+                                        id="phoneNumber"
+                                        className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
                                         required
                                         value={formData.phone}
                                         onChange={handlePhoneChange}
                                     />
+                                    <span id="valid-msg" className="hide">Valid Number</span>
+                                    <span id="error-msg" className="hide"></span>
+                                    {errors.phone && <span className="text-danger">{errors.phone}</span>}
                                 </div>
                                 <div className="form-group col-sm-6">
                                     <label>Facebook:</label>

@@ -5,27 +5,68 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import { format } from 'date-fns';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+// Helper function to format date without date-fns
+const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    try {
+        const date = new Date(dateString);
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    } catch (e) {
+        return 'N/A';
+    }
+};
+
+// Helper function to get relative time
+const getRelativeTime = (dateString) => {
+    if (!dateString) return 'N/A';
+    try {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) return 'Today';
+        if (diffDays === 1) return '1 day ago';
+        if (diffDays < 30) return `${diffDays} days ago`;
+        if (diffDays < 365) {
+            const months = Math.floor(diffDays / 30);
+            return `${months} month${months > 1 ? 's' : ''} ago`;
+        }
+        const years = Math.floor(diffDays / 365);
+        return `${years} year${years > 1 ? 's' : ''} ago`;
+    } catch (e) {
+        return 'N/A';
+    }
+};
 
 const MemberDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [member, setMember] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [activeTab, setActiveTab] = useState('member_details');
 
     useEffect(() => {
         const fetchMember = async () => {
             try {
+                setLoading(true);
+                setError(null);
                 const response = await api.get(`/members/${id}`);
+                console.log('Member API Response:', response.data);
                 if (response.data.success) {
                     setMember(response.data.data.member);
+                } else {
+                    setError('Failed to fetch member data');
                 }
-            } catch (error) {
-                console.error('Error fetching member:', error);
-                if (error.response?.status === 404) {
+            } catch (err) {
+                console.error('Error fetching member:', err);
+                setError(err.message || 'Error fetching member');
+                if (err.response?.status === 404) {
                     navigate('/members');
                 }
             } finally {
@@ -35,28 +76,88 @@ const MemberDetail = () => {
         fetchMember();
     }, [id, navigate]);
 
+    // Loading state
     if (loading) {
         return (
             <section className="section">
-                <div className="text-center py-5">
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only">Loading...</span>
+                <div className="section-header item-align-right">
+                    <h1>Member Details</h1>
+                    <div className="section-header-breadcrumb float-right">
+                        <Link to="/members" className="btn btn-primary form-btn">Back</Link>
+                    </div>
+                </div>
+                <div className="section-body">
+                    <div className="card">
+                        <div className="card-body text-center py-5">
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                            <p className="mt-3">Loading member details...</p>
+                        </div>
                     </div>
                 </div>
             </section>
         );
     }
 
-    if (!member) return null;
+    // Error state
+    if (error) {
+        return (
+            <section className="section">
+                <div className="section-header item-align-right">
+                    <h1>Member Details</h1>
+                    <div className="section-header-breadcrumb float-right">
+                        <Link to="/members" className="btn btn-primary form-btn">Back</Link>
+                    </div>
+                </div>
+                <div className="section-body">
+                    <div className="card">
+                        <div className="card-body text-center py-5">
+                            <div className="text-danger">
+                                <i className="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                                <h4>Error Loading Member</h4>
+                                <p>{error}</p>
+                            </div>
+                            <Link to="/members" className="btn btn-primary mt-3">Back to Members</Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    // No member found
+    if (!member) {
+        return (
+            <section className="section">
+                <div className="section-header item-align-right">
+                    <h1>Member Details</h1>
+                    <div className="section-header-breadcrumb float-right">
+                        <Link to="/members" className="btn btn-primary form-btn">Back</Link>
+                    </div>
+                </div>
+                <div className="section-body">
+                    <div className="card">
+                        <div className="card-body text-center py-5">
+                            <p className="text-muted">Member not found</p>
+                            <Link to="/members" className="btn btn-primary mt-3">Back to Members</Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="section">
             <div className="section-header item-align-right">
                 <h1>Member Details</h1>
                 <div className="section-header-breadcrumb float-right">
-                    <Link to={`/members/${id}/edit`} className="btn btn-warning mr-2 form-btn">
-                        Edit
-                    </Link>
+                    {!member.is_admin && (
+                        <Link to={`/members/${id}/edit`} className="btn btn-warning mr-2 form-btn">
+                            Edit
+                        </Link>
+                    )}
                     <Link to="/members" className="btn btn-primary form-btn">
                         Back
                     </Link>
@@ -65,12 +166,13 @@ const MemberDetail = () => {
             <div className="section-body">
                 <div className="card">
                     <div className="card-body">
-                        {/* Tabs */}
+                        {/* Tabs - matching PHP show_fields.blade.php */}
                         <ul className="nav nav-tabs mb-3" role="tablist">
                             <li className="nav-item">
                                 <button
                                     className={`nav-link ${activeTab === 'member_details' ? 'active' : ''}`}
                                     onClick={() => setActiveTab('member_details')}
+                                    type="button"
                                 >
                                     Member Details
                                 </button>
@@ -79,6 +181,7 @@ const MemberDetail = () => {
                                 <button
                                     className={`nav-link ${activeTab === 'tasks' ? 'active' : ''}`}
                                     onClick={() => setActiveTab('tasks')}
+                                    type="button"
                                 >
                                     Tasks
                                 </button>
@@ -86,15 +189,15 @@ const MemberDetail = () => {
                         </ul>
                         <br />
 
-                        {/* Content */}
+                        {/* Tab Content */}
                         {activeTab === 'member_details' && (
-                            <div className="tab-context">
-                                {/* Row 1 */}
+                            <div className="tab-content">
+                                {/* Row 1 - matching PHP member_details.blade.php */}
                                 <div className="row">
                                     <div className="col-md-3">
                                         <div className="form-group">
                                             <label>Name:</label>
-                                            <p dangerouslySetInnerHTML={{ __html: member.full_name }}></p>
+                                            <p>{member.full_name || `${member.first_name || ''} ${member.last_name || ''}`.trim() || 'N/A'}</p>
                                         </div>
                                     </div>
                                     <div className="col-md-3">
@@ -106,7 +209,7 @@ const MemberDetail = () => {
                                     <div className="col-md-3">
                                         <div className="form-group">
                                             <label>Email:</label>
-                                            <p>{member.email}</p>
+                                            <p>{member.email || 'N/A'}</p>
                                         </div>
                                     </div>
                                     <div className="col-md-3">
@@ -122,13 +225,13 @@ const MemberDetail = () => {
                                     <div className="col-md-3">
                                         <div className="form-group">
                                             <label>Staff Member:</label>
-                                            <p>{member.role_names?.includes('Staff Member') || !member.is_admin ? 'Yes' : 'No'}</p>
+                                            <p>{member.is_admin ? 'No' : 'Yes'}</p>
                                         </div>
                                     </div>
                                     <div className="col-md-3">
                                         <div className="form-group">
                                             <label>Send Welcome Email:</label>
-                                            <p>No</p> {/* This field isn't returned by API usually, defaulted to No */}
+                                            <p>No</p>
                                         </div>
                                     </div>
                                     <div className="col-md-3">
@@ -163,8 +266,12 @@ const MemberDetail = () => {
                                         <div className="form-group">
                                             <label>Created On:</label>
                                             <br />
-                                            <span title={format(new Date(member.created_at), 'do MMM, yyyy')}>
-                                                {format(new Date(member.created_at), 'do MMM, yyyy')}
+                                            <span
+                                                data-toggle="tooltip"
+                                                data-placement="right"
+                                                title={formatDate(member.created_at)}
+                                            >
+                                                {getRelativeTime(member.created_at)}
                                             </span>
                                         </div>
                                     </div>
@@ -172,8 +279,12 @@ const MemberDetail = () => {
                                         <div className="form-group">
                                             <label>Last Updated:</label>
                                             <br />
-                                            <span title={format(new Date(member.updated_at), 'do MMM, yyyy')}>
-                                                {format(new Date(member.updated_at), 'do MMM, yyyy')}
+                                            <span
+                                                data-toggle="tooltip"
+                                                data-placement="right"
+                                                title={formatDate(member.updated_at)}
+                                            >
+                                                {getRelativeTime(member.updated_at)}
                                             </span>
                                         </div>
                                     </div>
@@ -184,24 +295,30 @@ const MemberDetail = () => {
                                     <div className="col-sm-12">
                                         <label className="section-title">Permissions:</label>
                                     </div>
-                                    {member.permissionsGrouped && Object.entries(member.permissionsGrouped).map(([type, perms]) => (
-                                        <div key={type} className="col-md-6 col-lg-4 col-xl-3 col-sm-4 permission-text">
-                                            <div className="card-body">
-                                                <div className="section-title mt-0">{type}</div>
-                                                {perms.map(permission => (
-                                                    <div key={permission.id}>
-                                                        <label>{permission.display_name || permission.name}</label>
-                                                    </div>
-                                                ))}
+                                    {member.permissionsGrouped && Object.keys(member.permissionsGrouped).length > 0 ? (
+                                        Object.entries(member.permissionsGrouped).map(([type, perms]) => (
+                                            <div key={type} className="col-md-6 col-lg-4 col-xl-3 col-sm-4 permission-text">
+                                                <div className="card-body">
+                                                    <div className="section-title mt-0">{type}</div>
+                                                    {Array.isArray(perms) && perms.map((permission, idx) => (
+                                                        <div key={permission.id || idx}>
+                                                            <label>{permission.display_name || permission.name}</label>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
+                                        ))
+                                    ) : (
+                                        <div className="col-12">
+                                            <p className="text-muted">No permissions assigned</p>
                                         </div>
-                                    ))}
+                                    )}
                                 </div>
                             </div>
                         )}
 
                         {activeTab === 'tasks' && (
-                            <div className="text-center py-5">
+                            <div className="tab-content text-center py-5">
                                 <p className="text-muted">No Tasks Found.</p>
                             </div>
                         )}
