@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
-const LeadStatus = sequelize.define('LeadStatus', {
+const LeadSource = sequelize.define('LeadSource', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -10,19 +10,11 @@ const LeadStatus = sequelize.define('LeadStatus', {
     name: {
         type: DataTypes.STRING(191),
         allowNull: false
-    },
-    color: {
-        type: DataTypes.STRING(50),
-        allowNull: true
-    },
-    order: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
     }
 }, {
-    tableName: 'lead_statuses',
+    tableName: 'lead_sources',
     timestamps: true,
     underscored: true
 });
 
-export default LeadStatus;
+export default LeadSource;

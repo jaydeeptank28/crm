@@ -6,6 +6,12 @@ import Members from './pages/Members/Members';
 import MemberCreate from './pages/Members/MemberCreate';
 import MemberEdit from './pages/Members/MemberEdit';
 import MemberDetail from './pages/Members/MemberDetail';
+import Leads from './pages/Leads/Leads';
+import LeadCreate from './pages/Leads/LeadCreate';
+import LeadEdit from './pages/Leads/LeadEdit';
+import LeadDetail from './pages/Leads/LeadDetail';
+import LeadStatuses from './pages/Leads/LeadStatuses';
+import LeadSources from './pages/Leads/LeadSources';
 import Layout from './components/Layout/Layout';
 
 // Protected Route - redirects to login if not authenticated, wraps with Layout
@@ -61,6 +67,39 @@ function App() {
                 <Route path="/members/:id/edit" element={
                     <ProtectedRoute>
                         <MemberEdit />
+                    </ProtectedRoute>
+                } />
+                {/* Lead Status Routes */}
+                <Route path="/lead-status" element={
+                    <ProtectedRoute>
+                        <LeadStatuses />
+                    </ProtectedRoute>
+                } />
+                {/* Lead Sources Routes */}
+                <Route path="/lead-sources" element={
+                    <ProtectedRoute>
+                        <LeadSources />
+                    </ProtectedRoute>
+                } />
+                {/* Leads Routes */}
+                <Route path="/leads" element={
+                    <ProtectedRoute>
+                        <Leads />
+                    </ProtectedRoute>
+                } />
+                <Route path="/leads/create" element={
+                    <ProtectedRoute>
+                        <LeadCreate />
+                    </ProtectedRoute>
+                } />
+                <Route path="/leads/:id" element={
+                    <ProtectedRoute>
+                        <LeadDetail />
+                    </ProtectedRoute>
+                } />
+                <Route path="/leads/:id/edit" element={
+                    <ProtectedRoute>
+                        <LeadEdit />
                     </ProtectedRoute>
                 } />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />

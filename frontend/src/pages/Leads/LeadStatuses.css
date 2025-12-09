@@ -1,0 +1,91 @@
+/* Lead Statuses CSS - matches PHP DataTable styling */
+
+/* Table Styling */
+#leadStatusTbl {
+    width: 100% !important;
+}
+
+#leadStatusTbl th,
+#leadStatusTbl td {
+    vertical-align: middle;
+}
+
+/* Color Badge Circle */
+.badge-color-circle {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+/* Color Picker */
+.color-wrapper {
+    position: relative;
+}
+
+.color-picker {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 2px;
+}
+
+/* Action Buttons */
+.edit-btn {
+    margin-right: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #fc544b;
+}
+
+/* Modal Styling - match PHP Bootstrap modals */
+.modal.show {
+    display: block;
+}
+
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+/* Required asterisk */
+.required {
+    color: #fc544b;
+    margin-left: 3px;
+}
+
+/* Form styling */
+.form-group label {
+    font-weight: 600;
+}
+
+/* Alert styling */
+.alert-danger {
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+.btn-light {
+    background-color: #f4f6f9;
+    border-color: #f4f6f9;
+}
+
+.btn-light:hover {
+    background-color: #e5e9f2;
+    border-color: #e5e9f2;
+}
