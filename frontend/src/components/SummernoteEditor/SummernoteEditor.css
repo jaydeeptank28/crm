@@ -1,0 +1,50 @@
+/* SummernoteEditor CSS - Matching PHP's Summernote styling */
+
+.summernote-wrapper {
+    width: 100%;
+}
+
+/* Match PHP's Summernote container styling */
+.summernote-wrapper .note-editor {
+    border: 1px solid #e4e6fc;
+    border-radius: 0.25rem;
+}
+
+.summernote-wrapper .note-editor .note-toolbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e4e6fc;
+    padding: 0.5rem;
+}
+
+.summernote-wrapper .note-editor .note-editing-area {
+    min-height: 200px;
+}
+
+.summernote-wrapper .note-editor .note-editable {
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Toolbar button styling */
+.summernote-wrapper .note-btn {
+    background-color: #fff;
+    border: 1px solid #e4e6fc;
+    padding: 0.25rem 0.5rem;
+    font-size: 14px;
+}
+
+.summernote-wrapper .note-btn:hover {
+    background-color: #e9ecef;
+}
+
+.summernote-wrapper .note-btn.active {
+    background-color: #6777ef;
+    color: #fff;
+    border-color: #6777ef;
+}
+
+/* Dropdown styling */
+.summernote-wrapper .dropdown-menu {
+    font-size: 14px;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
+import SummernoteEditor from '../../components/SummernoteEditor/SummernoteEditor';
 import './Tasks.css';
 
 const TaskEdit = () => {
@@ -102,6 +103,10 @@ const TaskEdit = () => {
             ...prev,
             [name]: type === 'checkbox' ? checked : value
         }));
+    };
+
+    const handleDescriptionChange = (content) => {
+        setFormData(prev => ({ ...prev, description: content }));
     };
 
     const handleSubmit = async (e) => {
@@ -348,14 +353,12 @@ const TaskEdit = () => {
                                 {/* Description */}
                                 <div className="form-group col-sm-12 mb-0">
                                     <label htmlFor="description">Description:</label>
-                                    <textarea
-                                        className="form-control"
+                                    <SummernoteEditor
                                         id="taskDescription"
-                                        name="description"
-                                        rows="5"
                                         value={formData.description}
-                                        onChange={handleChange}
-                                    ></textarea>
+                                        onChange={handleDescriptionChange}
+                                        placeholder="Description"
+                                    />
                                 </div>
                             </div>
 
