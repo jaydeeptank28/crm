@@ -1,0 +1,108 @@
+/* Task Kanban CSS - Matching PHP kanban.scss */
+
+.avatar-container figure {
+    margin-right: 0;
+}
+
+.board-container {
+    min-height: 500px;
+}
+
+.board-container::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+}
+
+.board-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.board-container::-webkit-scrollbar-thumb {
+    background: #6777ef;
+    border-radius: 3px;
+}
+
+.board-container::-webkit-scrollbar-thumb:hover {
+    background: #5566db;
+}
+
+.board {
+    min-width: 280px;
+}
+
+.board .card-body {
+    min-height: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.board .card-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.board .card-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.board .card-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.board .card {
+    cursor: grab;
+    transition: box-shadow 0.2s ease;
+}
+
+.board .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.board .card.dragging {
+    opacity: 0.8;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dragging-over {
+    background-color: #e8f4fd !important;
+}
+
+.due-date {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.badge-padding {
+    padding: 5px 8px;
+}
+
+.font-size-medium {
+    font-size: 14px;
+}
+
+.avatar.avatar-sm {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar.avatar-sm img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.lock-board {
+    display: none;
+}
+
+.no-touch {
+    user-select: none;
+}
+
+.touch_action {
+    touch-action: none;
+}

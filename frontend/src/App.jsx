@@ -14,6 +14,11 @@ import LeadStatuses from './pages/Leads/LeadStatuses';
 import LeadSources from './pages/Leads/LeadSources';
 import LeadChart from './pages/Leads/LeadChart';
 import LeadKanban from './pages/Leads/LeadKanban';
+import Tasks from './pages/Tasks/Tasks';
+import TaskCreate from './pages/Tasks/TaskCreate';
+import TaskEdit from './pages/Tasks/TaskEdit';
+import TaskDetail from './pages/Tasks/TaskDetail';
+import TaskKanban from './pages/Tasks/TaskKanban';
 import Layout from './components/Layout/Layout';
 
 // Protected Route - redirects to login if not authenticated, wraps with Layout
@@ -119,6 +124,32 @@ function App() {
                 <Route path="/leads/:id/edit" element={
                     <ProtectedRoute>
                         <LeadEdit />
+                    </ProtectedRoute>
+                } />
+                {/* Task Routes */}
+                <Route path="/tasks" element={
+                    <ProtectedRoute>
+                        <Tasks />
+                    </ProtectedRoute>
+                } />
+                <Route path="/tasks/create" element={
+                    <ProtectedRoute>
+                        <TaskCreate />
+                    </ProtectedRoute>
+                } />
+                <Route path="/tasks/:id" element={
+                    <ProtectedRoute>
+                        <TaskDetail />
+                    </ProtectedRoute>
+                } />
+                <Route path="/tasks/:id/edit" element={
+                    <ProtectedRoute>
+                        <TaskEdit />
+                    </ProtectedRoute>
+                } />
+                <Route path="/task-kanban" element={
+                    <ProtectedRoute>
+                        <TaskKanban />
                     </ProtectedRoute>
                 } />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />

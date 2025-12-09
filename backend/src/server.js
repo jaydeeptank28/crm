@@ -11,6 +11,7 @@ import dashboardRoutes from './routes/dashboardRoutes.js';
 import memberRoutes from './routes/memberRoutes.js';
 import permissionRoutes from './routes/permissionRoutes.js';
 import leadRoutes from './routes/leadRoutes.js';
+import taskRoutes from './routes/taskRoutes.js';
 import { testConnection } from './services/emailService.js';
 
 // Load environment variables
@@ -50,6 +51,7 @@ app.use('/api', dashboardRoutes);
 app.use('/api/members', memberRoutes);
 app.use('/api/permissions', permissionRoutes);
 app.use('/api/leads', leadRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
