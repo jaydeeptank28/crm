@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import api from '../../services/api';
+import './Members.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 

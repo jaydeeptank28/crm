@@ -1,0 +1,161 @@
+/* Members Module CSS - Matching PHP Stisila Theme */
+
+/* ========================== */
+/* PERMISSIONS CHECKBOXES     */
+/* ========================== */
+
+/* Fix custom-control-input checkboxes - Bootstrap 4 style */
+.custom-control-input {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 1rem;
+    height: 1.25rem;
+    opacity: 0;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #6777ef;
+    background-color: #6777ef;
+}
+
+.custom-control-label {
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+    cursor: pointer;
+    padding-left: 0.5rem;
+}
+
+.custom-control-label::before {
+    position: absolute;
+    top: 0.15rem;
+    left: -1.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    content: "";
+    background-color: #fff;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.custom-control-label::after {
+    position: absolute;
+    top: 0.15rem;
+    left: -1.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    content: "";
+    background: no-repeat 50%/50% 50%;
+}
+
+.custom-control-input:checked~.custom-control-label::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
+}
+
+.custom-control {
+    position: relative;
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.custom-checkbox {
+    padding-left: 1.75rem;
+}
+
+/* Permission text styling */
+.permission-text {
+    margin-bottom: 15px;
+}
+
+.permission-text .card-body {
+    padding: 10px 15px;
+    border: 1px solid #e4e6fc;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.permission-text .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #34395e;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e4e6fc;
+    padding-bottom: 8px;
+}
+
+/* Section title for Permissions label */
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #34395e;
+}
+
+/* ========================== */
+/* MEMBER CARDS STYLING       */
+/* ========================== */
+
+.users-card {
+    padding: 0;
+}
+
+.users-border {
+    border: 1px solid #e4e6fc;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.hover-effect-users:hover {
+    box-shadow: 0 8px 25px rgba(103, 119, 239, 0.15);
+    border-color: #6777ef;
+}
+
+/* Thumbnail preview */
+.thumbnail-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+/* Profile label */
+.profile-label-color {
+    color: #34395e;
+}
+
+/* Image file upload button */
+.image__file-upload {
+    background: #6777ef;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.image__file-upload:hover {
+    background: #5a67d8;
+}
+
+/* Form required asterisk */
+.required {
+    color: #fc544b;
+}
+
+/* Error message styling */
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #fc544b;
+}
+
+.is-invalid {
+    border-color: #fc544b !important;
+}
