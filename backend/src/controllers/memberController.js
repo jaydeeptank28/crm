@@ -42,6 +42,11 @@ export const getMembers = async (req, res) => {
             owner_type: null
         };
 
+        // Hide Super Admin (is_admin=true) from non-admin users - matching PHP exactly
+        if (!req.user?.is_admin) {
+            whereClause.is_admin = false;
+        }
+
         if (status !== '' && status !== undefined) {
             whereClause.is_enable = status === '1' || status === 'true';
         }

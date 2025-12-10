@@ -5,6 +5,8 @@ import './Sidebar.css';
 const Sidebar = () => {
     const location = useLocation();
     const [openDropdowns, setOpenDropdowns] = useState({});
+    const [menuSearchTerm, setMenuSearchTerm] = useState('');
+    const [noResults, setNoResults] = useState(false);
 
     const isActive = (path) => location.pathname.startsWith(path) ? 'active' : '';
 
@@ -45,6 +47,29 @@ const Sidebar = () => {
         setOpenDropdowns(prev => ({ ...prev, ...newOpenDropdowns }));
     }, [location.pathname]);
 
+    // Menu search filter - matches PHP exactly
+    const isMenuItemVisible = (menuText) => {
+        if (!menuSearchTerm) return true;
+        return menuText.toLowerCase().includes(menuSearchTerm.toLowerCase());
+    };
+
+    // Track no results state
+    useEffect(() => {
+        if (!menuSearchTerm) {
+            setNoResults(false);
+            return;
+        }
+        // Check if any menu items match
+        const menuItems = ['Dashboard', 'Customer Groups', 'Customers', 'Members', 'Article Groups', 'Articles',
+            'Tags', 'Lead Status', 'Lead Sources', 'Leads', 'Projects', 'Tasks', 'Ticket Priorities',
+            'Ticket Status', 'Predefined Replies', 'Tickets', 'Invoices', 'Credit Notes', 'Proposals',
+            'Estimates', 'Payments', 'Departments', 'Expense Categories', 'Expenses', 'Payment Modes',
+            'Tax Rates', 'Announcements', 'Products', 'Product Groups', 'Contracts', 'Contract Types',
+            'Goals', 'Services', 'Settings', 'Countries', 'Activity Logs', 'Translation Manager'];
+        const hasMatch = menuItems.some(item => item.toLowerCase().includes(menuSearchTerm.toLowerCase()));
+        setNoResults(!hasMatch);
+    }, [menuSearchTerm]);
+
     return (
         <aside id="sidebar-wrapper">
             <div className="sidebar-brand sidebar-sticky sidebar-bottom-padding h-auto line-height-0 padding-bottom-zero">
@@ -53,14 +78,29 @@ const Sidebar = () => {
                     <span className="navbar-brand-full-name text-black text-wrap pl-2 w-75">InfyCRM</span>
                 </Link>
                 <div className="input-group sidebar-search-box">
-                    <input type="text" className="form-control searchTerm" id="searchText" placeholder="Search Menu" />
+                    <input
+                        type="text"
+                        className="form-control searchTerm"
+                        id="searchText"
+                        placeholder="Search Menu"
+                        value={menuSearchTerm}
+                        onChange={(e) => setMenuSearchTerm(e.target.value)}
+                    />
                     <div className="input-group-append sGroup">
                         <div className="input-group-text">
-                            <i className="fas fa-search search-sign"></i>
-                            <i className="fas fa-times close-sign"></i>
+                            <i
+                                className={`fas fa-search search-sign ${menuSearchTerm ? 'd-none' : ''}`}
+                            ></i>
+                            <i
+                                className={`fas fa-times close-sign ${menuSearchTerm ? '' : 'd-none'}`}
+                                onClick={() => setMenuSearchTerm('')}
+                                style={{ cursor: 'pointer' }}
+                            ></i>
                         </div>
                     </div>
-                    <div className="no-results mt-3 ml-1">No matching records found</div>
+                    <div className={`no-results mt-3 ml-1 ${noResults && menuSearchTerm ? '' : 'd-none'}`}>
+                        No matching records found
+                    </div>
                 </div>
             </div>
             <div className="sidebar-brand sidebar-brand-sm">

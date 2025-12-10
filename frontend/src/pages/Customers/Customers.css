@@ -78,7 +78,7 @@
     font-size: 12px;
 }
 
-/* Action Buttons */
+/* Action Buttons - Hidden until hover */
 .users-action-btn {
     display: flex;
     justify-content: center;
@@ -87,6 +87,13 @@
     border-top: 1px solid #f4f6f9;
     background: #fcfcfc;
     border-radius: 0 0 8px 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show action buttons on hover */
+.hover-effect-users:hover .users-action-btn {
+    opacity: 1;
 }
 
 .action-btn {

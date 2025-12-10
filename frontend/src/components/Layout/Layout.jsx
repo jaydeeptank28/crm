@@ -166,11 +166,11 @@ const Layout = ({ children }) => {
                         <li className="dropdown">
                             <a href="#" data-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user"
                                 onClick={(e) => e.preventDefault()}>
-                                {/* <img alt="image" width="50" id="loginUserImage"
-                                    src={user?.image_url ? `${API_URL}${user.image_url}` : '/assets/img/avatar/avatar-1.png'}
-                                    className="rounded-circle user-avatar-image"
-                                    onError={(e) => { e.target.onerror = null; e.target.src = '/assets/img/avatar/avatar-1.png'; }} /> */}
-                                <div className="d-sm-none d-lg-inline-block">
+                                {/* User initial avatar - matching PHP exactly */}
+                                <div className="user-initial-avatar rounded-circle">
+                                    {user?.first_name?.charAt(0)?.toUpperCase() || 'A'}
+                                </div>
+                                <div className="d-sm-none d-lg-inline-block ml-2">
                                     Hi, {user?.first_name || 'Admin'}
                                 </div>
                             </a>
