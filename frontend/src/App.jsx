@@ -24,6 +24,10 @@ import Customers from './pages/Customers/Customers';
 import CustomerCreate from './pages/Customers/CustomerCreate';
 import CustomerEdit from './pages/Customers/CustomerEdit';
 import CustomerDetail from './pages/Customers/CustomerDetail';
+import Projects from './pages/Projects/Projects';
+import ProjectCreate from './pages/Projects/ProjectCreate';
+import ProjectEdit from './pages/Projects/ProjectEdit';
+import ProjectDetail from './pages/Projects/ProjectDetail';
 import Layout from './components/Layout/Layout';
 
 // Protected Route - redirects to login if not authenticated, wraps with Layout
@@ -182,6 +186,27 @@ function App() {
                 <Route path="/customers/:id/edit" element={
                     <ProtectedRoute>
                         <CustomerEdit />
+                    </ProtectedRoute>
+                } />
+                {/* Project Routes */}
+                <Route path="/projects" element={
+                    <ProtectedRoute>
+                        <Projects />
+                    </ProtectedRoute>
+                } />
+                <Route path="/projects/create" element={
+                    <ProtectedRoute>
+                        <ProjectCreate />
+                    </ProtectedRoute>
+                } />
+                <Route path="/projects/:id" element={
+                    <ProtectedRoute>
+                        <ProjectDetail />
+                    </ProtectedRoute>
+                } />
+                <Route path="/projects/:id/edit" element={
+                    <ProtectedRoute>
+                        <ProjectEdit />
                     </ProtectedRoute>
                 } />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />

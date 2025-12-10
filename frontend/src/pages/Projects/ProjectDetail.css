@@ -1,0 +1,79 @@
+/* ProjectDetail.css - Matching PHP Stisila Theme */
+
+/* Labels */
+.form-group label {
+    font-weight: 600;
+    color: #34395e;
+    font-size: 14px;
+}
+
+.form-group p {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+/* Anchor links */
+.anchor-underline {
+    color: #6777ef;
+    text-decoration: none;
+}
+
+.anchor-underline:hover {
+    text-decoration: underline;
+}
+
+/* Badges */
+.badge.border {
+    font-weight: normal;
+    padding: 5px 10px;
+}
+
+/* Nav Tabs */
+.nav-tabs .nav-link {
+    color: #6c757d;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    color: #6777ef;
+    border-bottom: 2px solid #6777ef;
+    background: transparent;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #6777ef;
+}
+
+/* Card Header */
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid #e4e6fc;
+}
+
+/* Task Table */
+.rdt_Table {
+    border: 1px solid #e4e6fc;
+}
+
+.rdt_TableHeadRow {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.rdt_TableRow:hover {
+    background: #fbfbfb;
+}
+
+/* Item Align Right */
+.item-align-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Section Header Buttons */
+.section-header-breadcrumb .btn {
+    margin-left: 5px;
+}

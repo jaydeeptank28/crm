@@ -1,0 +1,233 @@
+/* Projects.css - Matching PHP Stisila Theme Exactly */
+
+/* Status Count Carousel */
+.owl-carousel-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.owl-carousel-wrapper .item {
+    text-align: center;
+    min-width: 100px;
+}
+
+.ticket-statistics {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.ticket-statistics p {
+    margin: 0;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.owl-carousel-wrapper h5 {
+    font-size: 13px;
+    color: #6c757d;
+    margin-top: 8px;
+}
+
+/* Project Card - Matching PHP */
+.livewire-card {
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+}
+
+.livewire-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.project-card-height {
+    min-height: 180px;
+}
+
+/* Card Colors - Matching PHP */
+.card-danger {
+    border-left: 4px solid #fc544b !important;
+}
+
+.card-primary {
+    border-left: 4px solid #6777ef !important;
+}
+
+.card-warning {
+    border-left: 4px solid #ffc107 !important;
+}
+
+.card-info {
+    border-left: 4px solid #3abaf4 !important;
+}
+
+.card-success {
+    border-left: 4px solid #47c363 !important;
+}
+
+/* Card Header */
+.livewire-card .card-header {
+    background: transparent;
+    border-bottom: none;
+    padding: 12px 15px 10px 15px;
+}
+
+.card-report-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #6777ef;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+
+.card-report-name:hover {
+    color: #394eea;
+}
+
+/* 3-Dots Dropdown */
+.action-dropdown {
+    color: #6c757d;
+    padding: 5px;
+}
+
+.action-dropdown:hover {
+    color: #6777ef;
+}
+
+.action-toggle-mr {
+    font-size: 16px;
+}
+
+.dropdown-list-icons .dropdown-item {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+.dropdown-list-icons .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.card-edit-icon {
+    color: #6777ef;
+}
+
+.card-delete-icon {
+    color: #fc544b;
+}
+
+/* Card Body */
+.livewire-card .card-body {
+    padding: 0 15px 10px 15px;
+}
+
+.projectStatistics {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.project-card-status {
+    margin-top: 0;
+}
+
+.projectStatus {
+    font-size: 11px;
+    padding: 4px 8px;
+}
+
+/* Member Avatars */
+.project-avatar-margin {
+    display: flex;
+    align-items: center;
+}
+
+.projectUserAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: -8px;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+
+.project_remaining_user {
+    font-size: 12px;
+    color: #6c757d;
+    margin-left: 10px;
+}
+
+/* Search */
+.search-display-block {
+    margin-bottom: 15px;
+}
+
+.search-display-block input {
+    min-width: 200px;
+}
+
+/* Pagination */
+.paginatorRow {
+    align-items: center;
+}
+
+.paginatorRow .pagination {
+    margin: 0;
+}
+
+.paginatorRow .page-link {
+    color: #6777ef;
+}
+
+.paginatorRow .page-item.active .page-link {
+    background-color: #6777ef;
+    border-color: #6777ef;
+}
+
+/* Header Filters */
+.section-header select {
+    min-width: 180px;
+}
+
+/* Extra Large Screens */
+@media (min-width: 1400px) {
+    .extra-large {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .owl-carousel-wrapper {
+        gap: 10px;
+    }
+
+    .ticket-statistics {
+        width: 50px;
+        height: 50px;
+    }
+
+    .ticket-statistics p {
+        font-size: 16px;
+    }
+
+    .mobile-sec-header {
+        flex-wrap: wrap;
+    }
+
+    .mobile-sec-header .section-header-breadcrumb {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
