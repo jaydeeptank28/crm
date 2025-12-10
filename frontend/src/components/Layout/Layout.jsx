@@ -166,10 +166,10 @@ const Layout = ({ children }) => {
                         <li className="dropdown">
                             <a href="#" data-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user"
                                 onClick={(e) => e.preventDefault()}>
-                                <img alt="image" width="50" id="loginUserImage"
+                                {/* <img alt="image" width="50" id="loginUserImage"
                                     src={user?.image_url ? `${API_URL}${user.image_url}` : '/assets/img/avatar/avatar-1.png'}
                                     className="rounded-circle user-avatar-image"
-                                    onError={(e) => { e.target.onerror = null; e.target.src = '/assets/img/avatar/avatar-1.png'; }} />
+                                    onError={(e) => { e.target.onerror = null; e.target.src = '/assets/img/avatar/avatar-1.png'; }} /> */}
                                 <div className="d-sm-none d-lg-inline-block">
                                     Hi, {user?.first_name || 'Admin'}
                                 </div>
