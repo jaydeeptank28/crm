@@ -22,11 +22,7 @@ const Address = sequelize.define('Address', {
         allowNull: false,
         defaultValue: 'billing'
     },
-    street1: {
-        type: DataTypes.STRING(255),
-        allowNull: true
-    },
-    street2: {
+    street: {
         type: DataTypes.STRING(255),
         allowNull: true
     },
