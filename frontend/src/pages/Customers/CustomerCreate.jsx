@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
+import Select from 'react-select';
 
 const CustomerCreate = () => {
     const navigate = useNavigate();
@@ -73,11 +74,11 @@ const CustomerCreate = () => {
         }));
     };
 
-    const handleGroupChange = (e) => {
-        const selectedOptions = Array.from(e.target.selectedOptions).map(option => parseInt(option.value));
+    const handleGroupChange = (selectedOptions) => {
+        const selectedIds = selectedOptions ? selectedOptions.map(option => option.value) : [];
         setFormData(prev => ({
             ...prev,
-            groups: selectedOptions
+            groups: selectedIds
         }));
     };
 
@@ -236,19 +237,29 @@ const CustomerCreate = () => {
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label>Groups:</label>
-                                                <select
-                                                    name="groups"
-                                                    className="form-control"
-                                                    multiple
-                                                    value={formData.groups}
-                                                    onChange={handleGroupChange}
-                                                    style={{ height: '120px' }}
-                                                >
-                                                    {Object.entries(syncData.customerGroups || {}).map(([key, value]) => (
-                                                        <option key={key} value={key}>{value}</option>
-                                                    ))}
-                                                </select>
-                                                <small className="form-text text-muted">Hold Ctrl/Cmd to select multiple</small>
+                                                <div className="input-group">
+                                                    <div style={{ flex: 1 }}>
+                                                        <Select
+                                                            isMulti
+                                                            options={Object.entries(syncData.customerGroups || {}).map(([key, value]) => ({
+                                                                value: parseInt(key),
+                                                                label: value
+                                                            }))}
+                                                            value={Object.entries(syncData.customerGroups || {})
+                                                                .filter(([key]) => formData.groups.includes(parseInt(key)))
+                                                                .map(([key, value]) => ({ value: parseInt(key), label: value }))}
+                                                            onChange={handleGroupChange}
+                                                            placeholder="Select Groups"
+                                                            className="react-select-container"
+                                                            classNamePrefix="react-select"
+                                                        />
+                                                    </div>
+                                                    <div className="input-group-append">
+                                                        <Link to="/customer-groups" className="input-group-text plus-icon-height" title="Add Customer Group">
+                                                            <i className="fa fa-plus"></i>
+                                                        </Link>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

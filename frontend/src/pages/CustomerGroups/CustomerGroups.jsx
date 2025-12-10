@@ -117,6 +117,12 @@ const CustomerGroups = () => {
             sortable: false
         },
         {
+            name: 'Customers',
+            selector: row => row.customer_count || 0,
+            sortable: true,
+            center: true
+        },
+        {
             name: 'Action',
             cell: row => (
                 <div className="action-buttons">

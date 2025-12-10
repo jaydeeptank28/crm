@@ -1,0 +1,268 @@
+/* Customers Module CSS - Matching PHP Stisila Theme EXACTLY */
+
+/* ========================== */
+/* CUSTOMER CARDS LAYOUT      */
+/* ========================== */
+
+.users-card {
+    padding: 0;
+}
+
+.users-border {
+    border: 1px solid #e4e6fc;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.users-card-hover-border {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+}
+
+.hover-effect-users:hover {
+    box-shadow: 0 8px 25px rgba(103, 119, 239, 0.15);
+    border-color: #6777ef;
+}
+
+.users-listing-details {
+    padding: 25px 20px 15px;
+}
+
+.users-listing-description {
+    text-align: center;
+}
+
+.users-avatar {
+    margin-bottom: 15px;
+}
+
+.users-avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f4f6f9;
+}
+
+.users-data {
+    margin-bottom: 10px;
+}
+
+.users-listing-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #34395e;
+    text-decoration: none;
+}
+
+.users-listing-title:hover {
+    color: #6777ef;
+}
+
+/* Badges */
+.assigned-user {
+    padding: 10px 20px 15px;
+}
+
+.badge-primary {
+    background: #6777ef;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+.badge-success {
+    background: #47c363;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+/* Action Buttons */
+.users-action-btn {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    border-top: 1px solid #f4f6f9;
+    background: #fcfcfc;
+    border-radius: 0 0 8px 8px;
+}
+
+.action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    color: #fff;
+    text-decoration: none;
+}
+
+.edit-btn,
+.users-edit {
+    background: #3abaf4;
+}
+
+.edit-btn:hover,
+.users-edit:hover {
+    background: #2aa9e0;
+    color: #fff;
+}
+
+.users-delete,
+.customer-delete-btn {
+    background: #fc544b;
+}
+
+.users-delete:hover,
+.customer-delete-btn:hover {
+    background: #e8423a;
+    color: #fff;
+}
+
+/* Search Input */
+.customer-dashboard-ticket-search {
+    min-width: 250px;
+    border: 1px solid #e4e6fc;
+    border-radius: 4px;
+    padding: 8px 15px;
+}
+
+.customer-dashboard-ticket-search:focus {
+    border-color: #6777ef;
+    box-shadow: 0 0 0 0.2rem rgba(103, 119, 239, 0.15);
+}
+
+/* Pagination */
+.paginatorRow {
+    align-items: center;
+}
+
+.pagination {
+    margin: 0;
+}
+
+.page-item .page-link {
+    border: 1px solid #e4e6fc;
+    color: #6c757d;
+    padding: 8px 14px;
+}
+
+.page-item.active .page-link {
+    background: #6777ef;
+    border-color: #6777ef;
+    color: #fff;
+}
+
+.page-item.disabled .page-link {
+    background: #f4f6f9;
+    color: #ccc;
+}
+
+.page-link:hover {
+    background: #f4f6f9;
+    color: #6777ef;
+}
+
+/* ========================== */
+/* SECTION STYLING            */
+/* ========================== */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 15px 0;
+}
+
+.section-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #34395e;
+    margin: 0;
+}
+
+/* Form button styling */
+.form-btn {
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.form-btn i {
+    margin-left: 5px;
+}
+
+/* Card styling */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e4e6fc;
+    padding: 15px 25px;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Button styling */
+.btn-primary {
+    background: #6777ef;
+    border-color: #6777ef;
+}
+
+.btn-primary:hover {
+    background: #5a67d8;
+    border-color: #5a67d8;
+}
+
+/* Loader */
+.live-wire-infy-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+/* Float utilities */
+.float-right-mobile {
+    float: right;
+}
+
+/* ========================== */
+/* RESPONSIVE                 */
+/* ========================== */
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .float-right-mobile {
+        float: none !important;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .customer-dashboard-ticket-search {
+        min-width: 100%;
+    }
+
+    .paginatorRow {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

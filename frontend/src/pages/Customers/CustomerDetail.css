@@ -1,0 +1,171 @@
+/* Customer Detail CSS - Matching PHP Stisila Theme */
+
+.anchor-underline {
+    text-decoration: underline;
+}
+
+.address-control {
+    padding: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.form-group p {
+    margin-bottom: 0;
+    color: #34395e;
+}
+
+.badge.border {
+    padding: 5px 10px;
+    font-weight: normal;
+}
+
+.section-header.item-align-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.section-header-breadcrumb select {
+    min-width: 200px;
+}
+
+/* Tab styling to match PHP */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border: none;
+    color: #6777ef;
+}
+
+.nav-tabs .nav-link.active {
+    color: #6777ef;
+    background-color: transparent;
+    border-bottom: 2px solid #6777ef;
+    margin-bottom: -2px;
+}
+
+/* Notes section */
+.note-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notes__information {
+    background: #f8f9fa;
+}
+
+.quill-editor-container {
+    min-height: 150px;
+    border: 1px solid #e4e6fc;
+    border-radius: 4px;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.action-buttons .btn-sm {
+    padding: 5px 10px;
+}
+
+/* Card styling */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e4e6fc;
+    padding: 15px 25px;
+}
+
+/* Add button styling */
+.add-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Required field indicator */
+.required {
+    color: #fc544b;
+}
+
+/* Form button styling */
+.form-btn {
+    font-weight: 500;
+}
+
+/* Responsive tab scrolling */
+@media (max-width: 768px) {
+    .nav-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-tabs .nav-item {
+        flex-shrink: 0;
+    }
+
+    .section-header.item-align-right {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* DataTable styling */
+.rdt_TableHeadRow {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.rdt_TableRow:hover {
+    background: #f8f9fa;
+}
+
+/* Flex utilities */
+.flex-1 {
+    flex: 1;
+}
+
+/* Spinner styling */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Text utilities */
+.text-job {
+    font-size: 12px;
+}
+
+/* User icons */
+.user__icons {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.user__icons:hover {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
