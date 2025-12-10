@@ -1,0 +1,18 @@
+/* Customer Groups CSS - Matching PHP */
+
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.required {
+    color: red;
+}
+
+.modal {
+    z-index: 1050;
+}
+
+.modal-dialog {
+    margin: 1.75rem auto;
+}

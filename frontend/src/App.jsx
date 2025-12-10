@@ -19,6 +19,9 @@ import TaskCreate from './pages/Tasks/TaskCreate';
 import TaskEdit from './pages/Tasks/TaskEdit';
 import TaskDetail from './pages/Tasks/TaskDetail';
 import TaskKanban from './pages/Tasks/TaskKanban';
+import CustomerGroups from './pages/CustomerGroups/CustomerGroups';
+import Customers from './pages/Customers/Customers';
+import CustomerCreate from './pages/Customers/CustomerCreate';
 import Layout from './components/Layout/Layout';
 
 // Protected Route - redirects to login if not authenticated, wraps with Layout
@@ -150,6 +153,23 @@ function App() {
                 <Route path="/task-kanban" element={
                     <ProtectedRoute>
                         <TaskKanban />
+                    </ProtectedRoute>
+                } />
+                {/* Customer Group Routes */}
+                <Route path="/customer-groups" element={
+                    <ProtectedRoute>
+                        <CustomerGroups />
+                    </ProtectedRoute>
+                } />
+                {/* Customer Routes */}
+                <Route path="/customers" element={
+                    <ProtectedRoute>
+                        <Customers />
+                    </ProtectedRoute>
+                } />
+                <Route path="/customers/create" element={
+                    <ProtectedRoute>
+                        <CustomerCreate />
                     </ProtectedRoute>
                 } />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
